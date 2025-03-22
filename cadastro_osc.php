@@ -7,8 +7,9 @@ include("cabecalho.php");
 include("lib_gop.php");
 
 $msg_erro = "";
-$c_nome = "";
-$c_nome_representante = "";
+$c_osa_nome = "";
+$c_num_cmas = "";
+$c_representante = "";
 $c_rg = "";
 $c_cpf = "";
 $c_cnpj = "";
@@ -16,6 +17,7 @@ $c_cmas = "";
 $c_fundacao = "";
 $c_tipo = "";
 $c_foto = "";
+$c_foto_logo = "";
 $c_endereco = "";
 $c_endereco_osc = "";
 $c_telefone = "";
@@ -24,19 +26,21 @@ $c_email = "";
 // rotina para inclusão das informações no banco de dados
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     do {
-        $c_nome = rtrim($_POST['nome']);
-        $c_nome_representante = $_POST['representante'];
-        $c_rg = $_POST['rg'];
-        $c_cpf = $_POST['cpf'];
-        $c_cnpj = $_POST['cnpj'];
-        $c_cmas = $_POST['cmas'];
-        $c_fundacao = $_POST['fundacao'];
-        $c_tipo = $_SESSION['c_tipo'];
-        $c_foto = $_SESSION['c_nomefoto'];
-        $c_endereco = $_POST['endereco'];
-        $c_enderco_OSC = $_POST['endereco_OSC'];
-        $c_telefone = $_POST['telefone'];
-        $c_email = $_POST['email'];
+        $c_osa_nome = "";
+        $c_num_cmas = "";
+        $c_representante = "";
+        $c_rg = "";
+        $c_cpf = "";
+        $c_cnpj = "";
+        $c_cmas = "";
+        $c_fundacao = "";
+        $c_tipo = "";
+        $c_foto = "";
+        $c_foto_logo = "";
+        $c_endereco = "";
+        $c_endereco_osc = "";
+        $c_telefone = "";
+        $c_email = "";
         $dir = "documentos/";
         if (!validaCPF($_POST['cpf'])) {  // consistência de cpf
             $msg_erro = "CPF informado inválido!!";
@@ -47,11 +51,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             break;
         }
         // verifico via sql se cpf já não foi cadastrado
-        $c_sql_pesquisa = "select count(*) as quantidade_cpf from organizacao where cpf=$c_cpf";
+        $c_sql_pesquisa = "select count(*) as quantidade_cnpj from organizacao where cnpj=$c_cpf";
         $result = $conection->query($c_sql_pesquisa);
         $registro = $result->fetch_assoc();
-        if ($registro['quantidade_cpf'] > 0) {
-            $msg_erro = "CPF informado já possui cadastro, favor verificar!!";
+        if ($registro['quantidade_cnpj'] > 0) {
+            $msg_erro = "CNPJ informado já possui cadastro, favor verificar!!";
             break;
         }
         // captura rg
@@ -127,18 +131,53 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
             </div>
-
-
-
-            <div class="row mb-8">
-                <label class="col-sm-2 col-form-label">Nome do Trabalhador</label>
-                <div class="col-sm-6">
-                    <input type="text" maxlength="120" class="form-control" name="nome" value="<?php echo $c_nome ?>" required>
-                </div>
+          
+            <div class="row mb-7">
+                <p class="col-sm-6"><strong>Nome da Organização da Sociedade Civil de Assistência Social:</p><strong>
+                    <div class="col-sm-7">
+                        <input type="text" maxlength="120" class="form-control" name="osa_nome" value="<?php echo $c_osa_nome ?>" required>
+                    </div>
             </div>
             <br>
             <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Data da Fundação </label>
+                <div class="col-sm-2">
+                    <input type="date" class="form-control" name="fundacao" value="<?php echo $c_fundacao ?>" required>
+                </div>
+                <label class="col-sm-1 col-form-label">Telefone</label>
+                <div class="col-sm-2">
+                    <input type="tel" onkeyup="handlePhone(event)" maxlength="25" class="form-control" name="telefone" placeholder="(XX)XXXX-XXXX" value="<?php echo $c_telefone ?>" required>
+                </div>
+            </div>
+
+            <div class="row mb-3">
                 <br>
+                <label class="col-sm-2 col-form-label">No. Inscrição CMAS </label>
+                <div class="col-sm-2">
+                    <input type="text" maxlength="2" class="form-control" name="num_cmas" value="<?php echo $c_num_cmas ?>" required>
+                </div>
+
+                <label class="col-sm-1 col-form-label">CNPJ </label>
+                <div class="col-sm-2">
+                    <input type="text" maxlength="14" class="form-control" name="cnpj" value="<?php echo $c_cnpj ?>" placeholder="somente números" required>
+                </div>
+            </div>
+
+
+            <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Endereço OSC </label>
+                <div class="col-sm-5">
+                    <input type="text" maxlength="150" class="form-control" name="endereco_osc" value="<?php echo $c_endereco_osc ?>" required>
+                </div>
+            </div>
+            <div class="row mb-8">
+                <label class="col-sm-2 col-form-label">Nome do Representante</label>
+                <div class="col-sm-5">
+                    <input type="text" maxlength="150" class="form-control" name="representante" value="<?php echo $c_representante ?>" required>
+                </div>
+            </div>
+            <div class="row mb-3">
+
                 <label class="col-sm-2 col-form-label">RG </label>
                 <div class="col-sm-2">
                     <input type="text" maxlength="15" class="form-control" name="rg" value="<?php echo $c_rg ?>" placeholder="somente números" required>
@@ -148,62 +187,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="text" maxlength="14" class="form-control" name="cpf" value="<?php echo $c_cpf ?>" placeholder="somente números" required>
                 </div>
             </div>
-
             <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Cargo </label>
-                <div class="col-sm-6">
-                    <input type="text" maxlength="150" class="form-control" name="cargo" value="<?php echo $c_cargo ?>" required>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <p><strong>Tempo de Prestação de Serviço (apresentar declaração comprobratória conforme anexo VII)</strong></p>
-                <div class="col-sm-8">
-                    <input type="text" maxlength="20" class="form-control" name="tempo" value="<?php echo $c_tempo ?>" required>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Endereço Residencial</label>
-                <div class="col-sm-6">
-                    <input type="text" maxlength="120" class="form-control" name="endereco_res" value="<?php echo $c_endereco_res ?>" required>
-                </div>
-            </div>
-            <div class="row mb-8">
-            <p><strong>Organização da Sociedade Civil ou Orgão governamental em que trabalha</strong></p>
-                <div class="col-sm-6">
-                    <input type="text" maxlength="150" class="form-control" name="org" value="<?php echo $c_org ?>" required>
-                </div>
-            </div>
-            <div class="row mb-10">
-                <p><strong>Serviço, programas ou projetos acessados e CRAS de referência</strong></p>
-                <div class="col-sm-8">
-                    <textarea class="form-control" id="motivo" name="servicos_programas" rows="5"><?php echo $c_servico_programas ?></textarea>
-                </div>
-            </div>
-            <hr>
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Endereço da Instituição</label>
-                <div class="col-sm-6">
+                <label class="col-sm-2 col-form-label">Endereço</label>
+                <div class="col-sm-5">
                     <input type="text" maxlength="120" class="form-control" name="endereco" value="<?php echo $c_endereco ?>" required>
                 </div>
-            </div>
 
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Telefone</label>
-                <div class="col-sm-2">
-                    <input type="tel" onkeyup="handlePhone(event)" maxlength="25" class="form-control" name="telefone" placeholder="(XX)XXXX-XXXX" value="<?php echo $c_telefone ?>" required>
-                </div>
             </div>
+           
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">E-mail</label>
-                <div class="col-sm-6">
+                <div class="col-sm-5">
                     <input type="email" maxlength="120" class="form-control" name="email" value="<?php echo $c_email ?>" required>
                 </div>
             </div>
+ 
             <hr>
             <div class="row mb-3">
                 <p>
-                <h5><strong>Obrigatório anexar Xerox de RG, CPF do candidato e declaração de trabalhador do<br>SUAS, emitido preg_last_error
-                        respectivo serviço ou OSC (anexo VII) <strong></h5>
+                <h5><strong>Obrigatório anexar cópia de RG, CPF do candidato e comprovante atualizado de CNPJ da OSC. </strong></h5>
                 </p>
 
             </div>
@@ -214,7 +216,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </p>
                 <input type='file' name='arquivo_rg' class='form-control-file' id='arquivo_rg' required>
             </div>
-            <hr>
+           
             <div class="row mb-3">
                 <p>
                 <h5><strong>CPF <strong></h5>
@@ -222,17 +224,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type='file' name='arquivo_cpf' class='form-control-file' id='arquivo_cpf' required>
             </div>
 
-
-            <hr>
             <div class="row mb-3">
                 <p>
-                <h5><strong>Declaração de trabalhador do SUAS, emitido pelo respectivo serviço ou OSC (anexo VII)<strong></h5>
+                <h5><strong>Comprovante atualizado de CNPJ da OSC<strong></h5>
                 </p>
                 <input type='file' name='arquivo_declaracao' class='form-control-file' id='arquivo_declaracao' required>
             </div>
-            <hr>
-
-
+          
             <div class="container-fluid" class="col-sm-1">
                 <br>
                 <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>

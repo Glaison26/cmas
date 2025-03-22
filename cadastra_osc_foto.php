@@ -22,6 +22,8 @@ if ((isset($_POST["btnfoto"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // 
     }
 }
 ?>
+
+
 <div class="container -my5">
     <div class="row mb-3">
         <div class="container">
