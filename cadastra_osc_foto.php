@@ -28,8 +28,8 @@ if ((isset($_POST["btnfoto"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // 
     <div class="row mb-3">
         <div class="container">
             <div class="alert alert-secondary">
-                <strong>Clique no botão abaixo "Escolher arquivo" e selecione uma foto da Logo Marca da OSC no formato jpg (máximo 2MB). Depois clique no botão abaixo
-                    "Enviar Foto" e aguarde o carregamento do arquivo</strong>
+                <strong>Clique no botão  "Escolher arquivo" e selecione uma imagem da Logo Marca da OSC do seu computador. Clique no botão
+                    "Enviar Foto" e aguarde o carregamento da imagem. Clique no botão "continuar" para prosseguir.</strong>
             </div>
         </div>
     </div>
@@ -37,7 +37,7 @@ if ((isset($_POST["btnfoto"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // 
         <div style='padding-left:7px;'>
             <div class='panel panel-info class'>
                 <div class='panel-heading'>
-                    <hr>
+                    
                     <input type='file' name='arquivo' class='form-control-file' id='arquivo' accept='image/*'>
                     <br>
                     <button type='submit' name='btnfoto' id='btnfoto' class='btn btn-Ligth'><img src='\gop\images\imagem2.png'
@@ -46,7 +46,7 @@ if ((isset($_POST["btnfoto"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // 
             </div>
         </div>
         <div class="row mb-3">
-            <label class="col-md-3 form-label">Foto do da Logo da OSC</label>
+            <label class="col-md-3 form-label">Foto da Logo marca da Organização da Sociedade Civil</label>
             <div class="col-sm-6">
                 <div class="panel-body">
                     <img class="rounded mx-auto d-block" class="img-responsive" src="\cmas\<?php echo $c_pasta; ?>" class="img-fluid" style="height :300px" style="width:400px">

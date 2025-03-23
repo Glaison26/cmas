@@ -26,21 +26,20 @@ $c_email = "";
 // rotina para inclusão das informações no banco de dados
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     do {
-        $c_osa_nome = "";
-        $c_num_cmas = "";
-        $c_representante = "";
-        $c_rg = "";
-        $c_cpf = "";
-        $c_cnpj = "";
-        $c_cmas = "";
-        $c_fundacao = "";
-        $c_tipo = "";
-        $c_foto = "";
-        $c_foto_logo = "";
-        $c_endereco = "";
-        $c_endereco_osc = "";
-        $c_telefone = "";
-        $c_email = "";
+        $c_osa_nome = $_POST['osa_nome'];
+        $c_num_cmas = $_POST['num_cmas'];
+        $c_representante = $_POST['representante'];
+        $c_rg = $_POST['rg'];
+        $c_cpf = $_POST['cpf'];
+        $c_cnpj =$_POST['cnpj'];
+        $c_fundacao =$_POST['fundacao'];
+        $c_tipo = $_SESSION['c_tipo'];
+        $c_foto =$_SESSION['c_nomefoto'];
+        $c_foto_logo = $_SESSION['c_nomefoto_osc'];
+        $c_endereco = $_POST['endereco'];
+        $c_endereco_osc = $_POST['endereco_osc'];
+        $c_telefone = $_POST['telefone'];
+        $c_email = $_POST['email'];
         $dir = "documentos/";
         if (!validaCPF($_POST['cpf'])) {  // consistência de cpf
             $msg_erro = "CPF informado inválido!!";
@@ -51,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             break;
         }
         // verifico via sql se cpf já não foi cadastrado
-        $c_sql_pesquisa = "select count(*) as quantidade_cnpj from organizacao where cnpj=$c_cpf";
+        $c_sql_pesquisa = "select count(*) as quantidade_cnpj from organizacao where cnpj=$c_cnpj";
         $result = $conection->query($c_sql_pesquisa);
         $registro = $result->fetch_assoc();
         if ($registro['quantidade_cnpj'] > 0) {
@@ -60,21 +59,22 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         // captura rg
         $arquivo_rg = $_FILES['arquivo_rg'];
-        move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_rg["name"]);
-        $c_pasta_rg = $c_nome . '_' . $dir . $arquivo_rg["name"];
+        move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_osa_nome . '_' . $arquivo_rg["name"]);
+        $c_pasta_rg =  $dir .$c_osa_nome . '_' . $arquivo_rg["name"];
         // captura cpf
         $arquivo_cpf = $_FILES['arquivo_cpf'];
-        move_uploaded_file($arquivo_cpf["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_cpf["name"]);
-        $c_pasta_cpf = $c_nome . '_' . $dir . $arquivo_cpf["name"];
+        move_uploaded_file($arquivo_cpf["tmp_name"], "$dir/" . $c_osa_nome . '_' . $arquivo_cpf["name"]);
+        $c_pasta_cpf = $dir . $c_osa_nome.'_'. $arquivo_cpf["name"];
         // captura comprovante
         $arquivo_comprovante = $_FILES['arquivo_comprovante'];
-        move_uploaded_file($arquivo_comprovante["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_comprovante["name"]);
-        $c_pasta_comprovante = $c_nome . '_' . $dir . $arquivo_comprovante["name"];
+        move_uploaded_file($arquivo_comprovante["tmp_name"], "$dir/" . $c_osa_nome . '_' . $arquivo_comprovante["name"]);
+        $c_pasta_comprovante = $dir . $c_osa_nome.'_'. $arquivo_comprovante["name"];
 
         // gravo as informações na tabela trabaladores suas
-        $c_sql = "Insert into trabalhador_suas (nome,rg,cpf,cargo, nome_org, tempo_prestacao,tipo,foto,servicos_programas,endereco_instituicao, endereco_res,telefone,email,
-                doc_rg, doc_cpf, doc_declaracao) value ('$c_nome', '$c_rg', '$c_cargo', '$c_org', '$c_tempo', '$c_cpf', '$c_tipo', '$c_foto','$c_servico_programas', 
-                '$c_endereco', '$c_endereco_res', '$c_telefone', '$c_email', '$c_pasta_rg','$c_pasta_cpf','$c_pasta_declaracao' )";
+        $c_sql = "Insert into organizacao (foto,logo,nome_osc,tipo,numero_cmas,cnpj,fundacao, endereco_osc, nome_representante,
+        rg,cpf,endereco, telefone,email, doc_rg, doc_cpf ,doc_comprovante) value 
+        ('$c_foto','$c_foto_logo','$c_osa_nome', '$c_tipo', '$c_num_cmas', '$c_cnpj', '$c_fundacao', '$c_endereco_osc', '$c_representante', 
+        '$c_rg', '$c_cpf','$c_endereco','$c_telefone', '$c_email', '$c_pasta_rg','$c_pasta_cpf','$c_pasta_comprovante' )";
 
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
@@ -228,7 +228,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <p>
                 <h5><strong>Comprovante atualizado de CNPJ da OSC<strong></h5>
                 </p>
-                <input type='file' name='arquivo_declaracao' class='form-control-file' id='arquivo_declaracao' required>
+                <input type='file' name='arquivo_comprovante' class='form-control-file' id='arquivo_comprovante' required>
             </div>
           
             <div class="container-fluid" class="col-sm-1">

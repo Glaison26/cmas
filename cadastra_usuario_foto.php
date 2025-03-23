@@ -31,8 +31,8 @@ if ((isset($_POST["btnfoto"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // 
     <div class="row mb-3">
         <div class="container">
             <div class="alert alert-secondary">
-                <strong>Clique no botão abaixo "Escolher arquivo" e selecione uma foto no formato jpg (máximo 2MB). Depois clique no botão abaixo
-                    "Enviar Foto" e aguarde o carregamento do arquivo</strong>
+                <strong>Clique no botão "Escolher arquivo" e selecione uma foto do seu computador. Clique no botão
+                    "Enviar Foto" e aguarde o carregamento da foto. Clique no botão "continuar" para prosseguir </strong>
             </div>
         </div>
     </div>
@@ -40,7 +40,7 @@ if ((isset($_POST["btnfoto"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // 
         <div style='padding-left:7px;'>
             <div class='panel panel-info class'>
                 <div class='panel-heading'>
-                    <hr>
+                    
                     <input type='file' name='arquivo' class='form-control-file' id='arquivo' accept='image/*'>
                     <br>
                     <button type='submit' name='btnfoto' id='btnfoto' class='btn btn-Ligth'><img src='\gop\images\imagem2.png'

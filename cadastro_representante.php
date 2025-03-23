@@ -53,15 +53,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // captura rg
         $arquivo_rg = $_FILES['arquivo_rg'];
         move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_rg["name"]);
-        $c_pasta_rg = $c_nome . '_' . $dir . $arquivo_rg["name"];
+        $c_pasta_rg =  $dir . $c_nome . '_' . $arquivo_rg["name"];
         // captura cpf
         $arquivo_cpf = $_FILES['arquivo_cpf'];
         move_uploaded_file($arquivo_cpf["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_cpf["name"]);
-        $c_pasta_cpf = $c_nome . '_' . $dir . $arquivo_cpf["name"];
+        $c_pasta_cpf =  $dir . $c_nome . '_'  . $arquivo_cpf["name"];
         // captura declaracao
         $arquivo_declaracao = $_FILES['arquivo_declaracao'];
         move_uploaded_file($arquivo_declaracao["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_declaracao["name"]);
-        $c_pasta_declaracao = $c_nome . '_' . $dir . $arquivo_declaracao["name"];
+        $c_pasta_declaracao = $dir . $c_nome . '_'  . $dir . $arquivo_declaracao["name"];
 
         // gravo as informações na tabela trabaladores suas
         $c_sql = "Insert into trabalhador_suas (nome,rg,cpf,cargo, nome_org, tempo_prestacao,tipo,foto,servicos_programas,endereco_instituicao, endereco_res,telefone,email,

@@ -49,19 +49,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // captura rg
         $arquivo_rg = $_FILES['arquivo_rg'];
         move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" .$c_nome.'_'. $arquivo_rg["name"]);
-        $c_pasta_rg = $c_nome.'_'.$dir . $arquivo_rg["name"];
+        $c_pasta_rg =  $dir . $c_nome . '_'  . $arquivo_rg["name"];
         // captura cpf
         $arquivo_cpf = $_FILES['arquivo_cpf'];
         move_uploaded_file($arquivo_cpf["tmp_name"], "$dir/" .$c_nome.'_'. $arquivo_cpf["name"]);
-        $c_pasta_cpf = $c_nome.'_'.$dir . $arquivo_cpf["name"];
+        $c_pasta_cpf =  $dir . $c_nome . '_'  . $arquivo_cpf["name"];
         // captura nis
         $arquivo_nis = $_FILES['arquivo_nis'];
         move_uploaded_file($arquivo_nis["tmp_name"], "$dir/" .$c_nome.'_'. $arquivo_nis["name"]);
-        $c_pasta_nis = $c_nome.'_'.$dir . $arquivo_nis["name"];
+        $c_pasta_nis =  $dir . $c_nome . '_'  . $arquivo_nis["name"];
         // captura resumo
         $arquivo_resumo = $_FILES['arquivo_resumo'];
         move_uploaded_file($arquivo_resumo["tmp_name"], "$dir/" .$c_nome.'_'. $arquivo_resumo["name"]);
-        $c_pasta_resumo = $c_nome.'_'.$dir . $arquivo_resumo["name"];
+        $c_pasta_resumo =  $dir . $c_nome . '_' . $arquivo_resumo["name"];
         
         // gravo as informações na tabela cadastro usuários
         $c_sql = "Insert into cadastro_usuarios (nome,rg,cpf,tipo,foto,nis,datanasc,servicos_programas,endereco,telefone,email, doc_rg, doc_cpf,doc_nis, doc_folha) 

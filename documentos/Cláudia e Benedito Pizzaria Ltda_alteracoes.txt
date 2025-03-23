@@ -1,0 +1,13 @@
+cadastro de pessoas fisicas
+
+campo para verificar se socio ou não
+
+
+
+data da que entrou como socio
+
+
+incluir local de atividades 
+
+tabela de local de atividades
+
