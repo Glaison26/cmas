@@ -15,14 +15,7 @@ include("cabecalho.php");
                 <strong> Prefeitura Municipal de Sabará - Pagina Inicial da plataforma. Clique no botão de Inscrição abixo para iniciar o cadastro.</strong>
             </div>
         </div>
-        <div class="container" class="text-primary">
-            <p>
-            <h5 class=" text-primary" Align="justify">
-                <a href="#"><b>Clique aqui para baixar o edital completo da Eleição</b></a>
-                <br>
-
-            </h5>
-        </div>
+        
 
         <div class="panel default class" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
             <div class="panel-heading">

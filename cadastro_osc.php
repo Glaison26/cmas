@@ -22,6 +22,7 @@ $c_endereco = "";
 $c_endereco_osc = "";
 $c_telefone = "";
 $c_email = "";
+$c_apresentacao = "";
 
 // rotina para inclusão das informações no banco de dados
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -31,15 +32,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $c_representante = $_POST['representante'];
         $c_rg = $_POST['rg'];
         $c_cpf = $_POST['cpf'];
-        $c_cnpj =$_POST['cnpj'];
-        $c_fundacao =$_POST['fundacao'];
+        $c_cnpj = $_POST['cnpj'];
+        $c_fundacao = $_POST['fundacao'];
         $c_tipo = $_SESSION['c_tipo'];
-        $c_foto =$_SESSION['c_nomefoto'];
+        $c_foto = $_SESSION['c_nomefoto'];
         $c_foto_logo = $_SESSION['c_nomefoto_osc'];
         $c_endereco = $_POST['endereco'];
         $c_endereco_osc = $_POST['endereco_osc'];
         $c_telefone = $_POST['telefone'];
         $c_email = $_POST['email'];
+        if ($_SESSION['c_tipo'] == 'C')
+            $c_apresentacao = $_POST['apresentacao'];
         $dir = "documentos/";
         if (!validaCPF($_POST['cpf'])) {  // consistência de cpf
             $msg_erro = "CPF informado inválido!!";
@@ -60,21 +63,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // captura rg
         $arquivo_rg = $_FILES['arquivo_rg'];
         move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_osa_nome . '_' . $arquivo_rg["name"]);
-        $c_pasta_rg =  $dir .$c_osa_nome . '_' . $arquivo_rg["name"];
+        $c_pasta_rg =  $dir . $c_osa_nome . '_' . $arquivo_rg["name"];
         // captura cpf
         $arquivo_cpf = $_FILES['arquivo_cpf'];
         move_uploaded_file($arquivo_cpf["tmp_name"], "$dir/" . $c_osa_nome . '_' . $arquivo_cpf["name"]);
-        $c_pasta_cpf = $dir . $c_osa_nome.'_'. $arquivo_cpf["name"];
+        $c_pasta_cpf = $dir . $c_osa_nome . '_' . $arquivo_cpf["name"];
         // captura comprovante
         $arquivo_comprovante = $_FILES['arquivo_comprovante'];
         move_uploaded_file($arquivo_comprovante["tmp_name"], "$dir/" . $c_osa_nome . '_' . $arquivo_comprovante["name"]);
-        $c_pasta_comprovante = $dir . $c_osa_nome.'_'. $arquivo_comprovante["name"];
+        $c_pasta_comprovante = $dir . $c_osa_nome . '_' . $arquivo_comprovante["name"];
 
         // gravo as informações na tabela trabaladores suas
         $c_sql = "Insert into organizacao (foto,logo,nome_osc,tipo,numero_cmas,cnpj,fundacao, endereco_osc, nome_representante,
-        rg,cpf,endereco, telefone,email, doc_rg, doc_cpf ,doc_comprovante) value 
+        rg,cpf,endereco, telefone,email, doc_rg, doc_cpf ,doc_comprovante, apresentacao) value 
         ('$c_foto','$c_foto_logo','$c_osa_nome', '$c_tipo', '$c_num_cmas', '$c_cnpj', '$c_fundacao', '$c_endereco_osc', '$c_representante', 
-        '$c_rg', '$c_cpf','$c_endereco','$c_telefone', '$c_email', '$c_pasta_rg','$c_pasta_cpf','$c_pasta_comprovante' )";
+        '$c_rg', '$c_cpf','$c_endereco','$c_telefone', '$c_email', '$c_pasta_rg','$c_pasta_cpf','$c_pasta_comprovante', '$c_apresentacao' )";
 
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
@@ -131,7 +134,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
             </div>
-          
+
             <div class="row mb-7">
                 <p class="col-sm-6"><strong>Nome da Organização da Sociedade Civil de Assistência Social:</p><strong>
                     <div class="col-sm-7">
@@ -149,7 +152,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="tel" onkeyup="handlePhone(event)" maxlength="25" class="form-control" name="telefone" placeholder="(XX)XXXX-XXXX" value="<?php echo $c_telefone ?>" required>
                 </div>
             </div>
-
+            <?php
+            if ($_SESSION['c_tipo'] == 'C')
+                echo '
+                <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Apresentação</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" id="apresentacao" name="apresentacao" rows="5">' . $c_apresentacao . '</textarea>
+                    </div>
+                </div>
+                <br>';
+            ?>
             <div class="row mb-3">
                 <br>
                 <label class="col-sm-2 col-form-label">No. Inscrição CMAS </label>
@@ -194,14 +207,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
 
             </div>
-           
+
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">E-mail</label>
                 <div class="col-sm-5">
                     <input type="email" maxlength="120" class="form-control" name="email" value="<?php echo $c_email ?>" required>
                 </div>
             </div>
- 
+
             <hr>
             <div class="row mb-3">
                 <p>
@@ -216,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </p>
                 <input type='file' name='arquivo_rg' class='form-control-file' id='arquivo_rg' required>
             </div>
-           
+
             <div class="row mb-3">
                 <p>
                 <h5><strong>CPF <strong></h5>
@@ -230,7 +243,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </p>
                 <input type='file' name='arquivo_comprovante' class='form-control-file' id='arquivo_comprovante' required>
             </div>
-          
+
             <div class="container-fluid" class="col-sm-1">
                 <br>
                 <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>

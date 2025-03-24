@@ -20,6 +20,7 @@ $c_endereco = "";
 $c_endereco_res = "";
 $c_telefone = "";
 $c_email = "";
+$c_apresentacao = "";
 
 // rotina para inclusão das informações no banco de dados
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -37,13 +38,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $c_enderco_res = $_POST['endereco_res'];
         $c_telefone = $_POST['telefone'];
         $c_email = $_POST['email'];
+        if ($_SESSION['c_tipo'] == 'C')
+            $c_apresentacao = $_POST['apresentacao'];
         $dir = "documentos/";
         if (!validaCPF($_POST['cpf'])) {  // consistência de cpf
             $msg_erro = "CPF informado inválido!!";
             break;
         }
         // verifico via sql se cpf já não foi cadastrado
-        $c_sql_pesquisa = "select count(*) as quantidade_cpf from trabalhador_suas where cpf=$c_cpf";
+        $c_sql_pesquisa = "select count(*) as quantidade_cpf from trabalhador_suas where cpf='$c_cpf'";
         $result = $conection->query($c_sql_pesquisa);
         $registro = $result->fetch_assoc();
         if ($registro['quantidade_cpf'] > 0) {
@@ -65,8 +68,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         // gravo as informações na tabela trabaladores suas
         $c_sql = "Insert into trabalhador_suas (nome,rg,cpf,cargo, nome_org, tempo_prestacao,tipo,foto,servicos_programas,endereco_instituicao, endereco_res,telefone,email,
-                doc_rg, doc_cpf, doc_declaracao) value ('$c_nome', '$c_rg', '$c_cargo', '$c_org', '$c_tempo', '$c_cpf', '$c_tipo', '$c_foto','$c_servico_programas', 
-                '$c_endereco', '$c_endereco_res', '$c_telefone', '$c_email', '$c_pasta_rg','$c_pasta_cpf','$c_pasta_declaracao' )";
+                doc_rg, doc_cpf, doc_declaracao, apresentacao) value ('$c_nome', '$c_rg', '$c_cargo', '$c_org', '$c_tempo', '$c_cpf', '$c_tipo', '$c_foto','$c_servico_programas', 
+                '$c_endereco', '$c_endereco_res', '$c_telefone', '$c_email', '$c_pasta_rg','$c_pasta_cpf','$c_pasta_declaracao', '$c_apresentacao' )";
 
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
@@ -124,8 +127,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
 
-
-
             <div class="row mb-8">
                 <label class="col-sm-2 col-form-label">Nome do Trabalhador</label>
                 <div class="col-sm-6">
@@ -133,6 +134,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <br>
+            <?php
+            if ($_SESSION['c_tipo'] == 'C')
+                echo '
+                <div class="row mb-3">
+                <label class="col-sm-2 col-form-label">Apresentação</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" id="apresentacao" name="apresentacao" rows="5">' . $c_apresentacao . '</textarea>
+                    </div>
+                </div>
+                <br>';
+            ?>
             <div class="row mb-3">
                 <br>
                 <label class="col-sm-2 col-form-label">RG </label>
@@ -164,7 +176,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row mb-8">
-            <p><strong>Organização da Sociedade Civil ou Orgão governamental em que trabalha</strong></p>
+                <p><strong>Organização da Sociedade Civil ou Orgão governamental em que trabalha</strong></p>
                 <div class="col-sm-6">
                     <input type="text" maxlength="150" class="form-control" name="org" value="<?php echo $c_org ?>" required>
                 </div>

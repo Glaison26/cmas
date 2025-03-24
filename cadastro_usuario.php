@@ -18,6 +18,7 @@ $c_servico_programas = "";
 $c_endereco = "";
 $c_telefone = "";
 $c_email = "";
+$c_apresentacao = "";
 
 // rotina para inclusão das informações no banco de dados
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -33,13 +34,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $c_endereco = $_POST['endereco'];
         $c_telefone = $_POST['telefone'];
         $c_email = $_POST['email'];
+        if ($_SESSION['c_tipo'] == 'C') // apresentação apenas para candidatos
+            $c_apresentacao = $_POST['apresentacao'];
         $dir = "documentos/";
         if (!validaCPF($_POST['cpf'])) {  // consistência de cpf
             $msg_erro = "CPF informado inválido!!";
             break;
         }
         // verifico via sql se cpf já não foi cadastrado
-        $c_sql_pesquisa = "select count(*) as quantidade_cpf from cadastro_usuarios where cpf=$c_cpf";
+        $c_sql_pesquisa = "select count(*) as quantidade_cpf from cadastro_usuarios where cpf='$c_cpf'";
+        echo $c_sql_pesquisa;
         $result = $conection->query($c_sql_pesquisa);
         $registro = $result->fetch_assoc();
         if ($registro['quantidade_cpf'] > 0) {
@@ -48,25 +52,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         // captura rg
         $arquivo_rg = $_FILES['arquivo_rg'];
-        move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" .$c_nome.'_'. $arquivo_rg["name"]);
+        move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_rg["name"]);
         $c_pasta_rg =  $dir . $c_nome . '_'  . $arquivo_rg["name"];
         // captura cpf
         $arquivo_cpf = $_FILES['arquivo_cpf'];
-        move_uploaded_file($arquivo_cpf["tmp_name"], "$dir/" .$c_nome.'_'. $arquivo_cpf["name"]);
+        move_uploaded_file($arquivo_cpf["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_cpf["name"]);
         $c_pasta_cpf =  $dir . $c_nome . '_'  . $arquivo_cpf["name"];
         // captura nis
         $arquivo_nis = $_FILES['arquivo_nis'];
-        move_uploaded_file($arquivo_nis["tmp_name"], "$dir/" .$c_nome.'_'. $arquivo_nis["name"]);
+        move_uploaded_file($arquivo_nis["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_nis["name"]);
         $c_pasta_nis =  $dir . $c_nome . '_'  . $arquivo_nis["name"];
         // captura resumo
         $arquivo_resumo = $_FILES['arquivo_resumo'];
-        move_uploaded_file($arquivo_resumo["tmp_name"], "$dir/" .$c_nome.'_'. $arquivo_resumo["name"]);
+        move_uploaded_file($arquivo_resumo["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_resumo["name"]);
         $c_pasta_resumo =  $dir . $c_nome . '_' . $arquivo_resumo["name"];
-        
+
         // gravo as informações na tabela cadastro usuários
-        $c_sql = "Insert into cadastro_usuarios (nome,rg,cpf,tipo,foto,nis,datanasc,servicos_programas,endereco,telefone,email, doc_rg, doc_cpf,doc_nis, doc_folha) 
+        $c_sql = "Insert into cadastro_usuarios (nome,rg,cpf,tipo,foto,nis,datanasc,servicos_programas,endereco,telefone,email, doc_rg, doc_cpf,doc_nis, doc_folha, apresentacao) 
                 value ('$c_nome', '$c_rg', '$c_cpf', '$c_tipo', '$c_foto', '$c_nis', '$d_datanasc', '$c_servico_programas', 
-                '$c_endereco', '$c_telefone', '$c_email', '$c_pasta_rg','$c_pasta_cpf','$c_pasta_nis','$c_pasta_resumo' )";
+                '$c_endereco', '$c_telefone', '$c_email', '$c_pasta_rg','$c_pasta_cpf','$c_pasta_nis','$c_pasta_resumo', '$c_apresentacao' )";
 
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
@@ -132,10 +136,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         <input type="text" maxlength="120" class="form-control" name="nome" value="<?php echo $c_nome ?>" required>
                     </div>
                 </div>
-
                 <br>
+                <?php
+                if ($_SESSION['c_tipo'] == 'C')
+                    echo '
                 <div class="row mb-3">
-                    <label class="col-sm-2 col-form-label">RG  </label>
+                <label class="col-sm-2 col-form-label">Apresentação</label>
+                    <div class="col-sm-6">
+                        <textarea class="form-control" id="apresentacao" name="apresentacao" rows="5">' . $c_apresentacao . '</textarea>
+                    </div>
+                </div>
+                <br>';
+                ?>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">RG </label>
                     <div class="col-sm-2">
                         <input type="text" maxlength="15" class="form-control" name="rg" value="<?php echo $c_rg ?>" placeholder="somente números" required>
                     </div>
@@ -196,21 +210,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <p>
                 <h5><strong>Cópia de Rg<strong></h5>
                 </p>
-                <input type='file' name='arquivo_rg' class='form-control-file' id='arquivo_rg' required >
+                <input type='file' name='arquivo_rg' class='form-control-file' id='arquivo_rg' required>
             </div>
             <hr>
             <div class="row mb-3">
                 <p>
                 <h5><strong>CPF <strong></h5>
                 </p>
-                <input type='file' name='arquivo_cpf' class='form-control-file' id='arquivo_cpf' required >
+                <input type='file' name='arquivo_cpf' class='form-control-file' id='arquivo_cpf' required>
             </div>
             <hr>
             <div class="row mb-3">
                 <p>
                 <h5><strong>Documento com número NIS<strong></h5>
                 </p>
-                <input type='file' name='arquivo_nis' class='form-control-file' id='arquivo_nis' required >
+                <input type='file' name='arquivo_nis' class='form-control-file' id='arquivo_nis' required>
             </div>
             <hr>
             <div class="row mb-3">
@@ -218,7 +232,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <h5><strong>Folha Resumo do Cadastro Único dos últimos dois anos e declaração de usuário do SUAS,
                         emitido pelo respectivo serviço ou OSC (Anexo VI)<strong></h5>
                 </p>
-                <input type='file' name='arquivo_resumo' class='form-control-file' id='arquivo_resumo' required >
+                <input type='file' name='arquivo_resumo' class='form-control-file' id='arquivo_resumo' required>
             </div>
             <hr>
 

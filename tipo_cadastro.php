@@ -4,16 +4,31 @@ session_start();
 // conexão dom o banco de dados
 include("conexao.php");
 include("cabecalho.php");
+$_SESSION['c_nomefoto'] = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['c_selecao'] = $_POST['selecao'];
     $_SESSION['c_tipo'] = $_POST['tipo'];
     // aqui direciono para formulário de eleitor ou candidato para formulário de captura de foto
-    if ($_POST['selecao'] == "1" || $_POST['selecao'] == "2")
-        header('location: /cmas/cadastra_usuario_foto.php');
-    else
-        header('location: /cmas/cadastra_osc_foto.php'); // aqui direciono para captura de foto da logo da OSC "0"
+    if ($_POST['selecao'] == "1" || $_POST['selecao'] == "2") {
+        if ($_SESSION['c_tipo'] == 'C')
+            header('location: /cmas/cadastra_usuario_foto.php'); // faço chamada da foto para candidato
+
+        else { // chama o cadastro apenas para eleitores sem pedir foto
+            if ($_POST['selecao'] == "1")
+                header('location: /cmas/cadastro_usuario.php');
+            if ($_SESSION['c_selecao'] == "2")
+                header('location: /cmas/cadastro_representante.php');
+        }
+    } else {
+
+        if ($_SESSION['c_tipo'] == 'C')  // candidato com foto
+            header('location: /cmas/cadastra_osc_foto.php'); // aqui direciono para captura de foto da logo da OSC "0"
+        else // apenas leitor vai direto para o cadastro
+            header('location: /cmas/cadastro_osc.php');
+    }
 }
+
 ?>
 
 
