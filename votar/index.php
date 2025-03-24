@@ -1,5 +1,5 @@
 <?php
-include("cabecalho.php");
+include("../cabecalho.php");
 ?>
 
 <!DOCTYPE html>
@@ -12,18 +12,10 @@ include("cabecalho.php");
     <div class="container -my5">
         <div class="container">
             <div class="alert alert-success">
-                <strong> Prefeitura Municipal de Sabará - Pagina Inicial da plataforma. Clique no botão de Inscrição abixo para iniciar o cadastro.</strong>
+                <strong> Prefeitura Municipal de Sabará - Pagina Inicial da plataforma. Clique Registrar voto para iniciar a votação.</strong>
             </div>
         </div>
-        <div class="container" class="text-primary">
-            <p>
-            <h5 class=" text-primary" Align="justify">
-                <a href="#"><b>Clique aqui para baixar o edital completo da Eleição</b></a>
-                <br>
-
-            </h5>
-        </div>
-
+       
         <div class="panel default class" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" align="center">
             <div class="panel-heading">
                 <img class="rounded mx-auto d-block" class="img-responsive" src="\cmas\imagens\cmas.jpg" class="img-fluid" style="height :200px" style="width:200px">
@@ -32,7 +24,7 @@ include("cabecalho.php");
 
         <div class="container -my5" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" align="left">
             <br>
-            <a id="insc" class="btn btn-primary btn-lg" href="/cmas/tipo_cadastro.php"><span class="glyphicon glyphicon-edit"></span> Clique aqui para inscrição</a>
+            <a id="insc" class="btn btn-primary btn-lg" href="/cmas/votar/captura_cpf.php"><img src="\cmas\imagens\vote3.png" alt="" width="40" height="40"></span> Clique aqui para Votar</a>
             <hr>
         </div>
 

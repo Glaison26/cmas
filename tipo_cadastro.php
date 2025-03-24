@@ -80,9 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <br>
             <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-circle-arrow-right'></span> Continuar</button>
-            <a class='btn btn-danger' href='/cmas/index.php'><span class='glyphicon glyphicon-menu-left'></span> Voltar</a>
-
-
+            <a class='btn btn-danger' href='/cmas/index.php'><span class='glyphicon glyphicon-menu-left'></span> Voltar ao inicio</a>
         </form>
     </div>
 

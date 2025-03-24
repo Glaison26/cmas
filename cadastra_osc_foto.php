@@ -28,8 +28,8 @@ if ((isset($_POST["btnfoto"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // 
     <div class="row mb-3">
         <div class="container">
             <div class="alert alert-secondary">
-                <strong>Clique no botão  "Escolher arquivo" e selecione uma imagem da Logo Marca da OSC do seu computador. Clique no botão
-                    "Enviar Foto" e aguarde o carregamento da imagem. Clique no botão "continuar" para prosseguir.</strong>
+                <strong>Clique no botão  "Escolher arquivo" e selecione uma imagem da Logomarca da OSC do seu computador. Clique no botão
+                    "Carregar imagem" e aguarde o carregamento da imagem. Clique no botão "continuar" para prosseguir.</strong>
             </div>
         </div>
     </div>
@@ -40,8 +40,8 @@ if ((isset($_POST["btnfoto"])) && ($_SERVER['REQUEST_METHOD'] == 'POST')) {  // 
                     
                     <input type='file' name='arquivo' class='form-control-file' id='arquivo' accept='image/*'>
                     <br>
-                    <button type='submit' name='btnfoto' id='btnfoto' class='btn btn-Ligth'><img src='\gop\images\imagem2.png'
-                            alt='' width='20' height='20'> Enviar Foto</button>
+                    <button type='submit' name='btnfoto' id='btnfoto' class='btn btn-success'><img src='\cmas\imagens\camera.png'
+                            alt='' width='20' height='20'> Carregar imagem</button>
                 </div>
             </div>
         </div>
