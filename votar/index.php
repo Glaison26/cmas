@@ -7,6 +7,8 @@ $_SESSION['foto2'] ="";
 $_SESSION['nome_candidato2'] ="";
 $_SESSION['apresentacao1']="";
 $_SESSION['apresentacao2']="";
+$_SESSION['representante1']="";
+$_SESSION['representante2']="";
 $_SESSION['logo']="";
 $_SESSION['logo2']="";
 ?>
@@ -19,7 +21,7 @@ $_SESSION['logo2']="";
     <div class="container -my5">
         <div class="container">
             <div class="alert alert-success">
-                <strong> Prefeitura Municipal de Sabará - Pagina Inicial da plataforma. Clique Registrar voto para iniciar a votação.</strong>
+                <strong> Prefeitura Municipal de Sabará - Pagina Inicial da plataforma.</strong>
             </div>
         </div>
        
@@ -31,7 +33,7 @@ $_SESSION['logo2']="";
 
         <div class="container -my5" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" align="left">
             <br>
-            <a id="insc" class="btn btn-primary btn-lg" href="/cmas/votar/captura_cpf.php"><img src="\cmas\imagens\vote3.png" alt="" width="40" height="40"></span> Clique aqui para Votar</a>
+            <a id="insc" class="btn btn-primary btn-lg" href="/cmas/votar/captura_cpf.php"><img src="\cmas\imagens\vote3.png" alt="" width="40" height="40"></span> Clique aqui para votar</a>
             <hr>
         </div>
 

@@ -7,11 +7,13 @@ include("../conexao.php");
 $c_pasta1 = $_SESSION['foto'];
 $c_logo1 = $_SESSION['logo'];
 $c_candidato1 = $_SESSION['nome_candidato'];
+$c_representante1 = $_SESSION['representante1'];
 $c_apresentacao1 = $_SESSION['apresentacao1'];
 //
 $c_pasta2 = $_SESSION['foto2'];
 $c_logo2 = $_SESSION['logo2'];
 $c_candidato2 = $_SESSION['nome_candidato2'];
+$c_representante2 = $_SESSION['representante2'];
 $c_apresentacao2 = $_SESSION['apresentacao2'];
 
 $d_data = date("Y-m-d");
@@ -109,6 +111,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="container">
+                <div class="alert alert-info" align="center">
+                    <strong>Candidato 1</strong>
+                </div>
                 <!--    CANDIDATO 1  --->
                 <div class="row mb-6">
                     <label class="col-sm-3 col-form-label">Candidato 1</label>
@@ -136,13 +141,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </select>
                     </div>
                 </div>
+
+
+
                 <div class="row mb-6">
                     <label class="col-md-2 form-label">Logomarca </label>
-                    <div class="col-sm-6">
-                        <div class="panel-body">
-                            <img class="rounded mx-auto d-block" class="img-responsive"
-                                src="\cmas\fotos\<?php echo $c_logo1; ?>" class="img-fluid" style="height :250px" style="width:250px">
-                        </div>
+
+                    <div class="panel-body">
+                        <img class="rounded mx-auto d-block" class="img-responsive"
+                            src="\cmas\fotos\<?php echo $c_logo1; ?>" class="img-fluid" style="height :250px" style="width:250px">
+                    </div>
+
+                </div>
+                <div class="row mb-6">
+                    <label class="col-sm-3 col-form-label">Representante </label>
+                    <div class="col-sm-5">
+                        <input readonly type="text" maxlength="120" class="form-control"
+                            name="representante1" value="<?php echo $c_representante1 ?>">
                     </div>
                 </div>
                 <div class="row mb-6">
@@ -162,6 +177,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <hr>
                 <!--    CANDIDATO 2  --->
+                <div class="alert alert-info" align="center">
+                    <strong>Candidato 1</strong>
+                </div>
                 <div class="row mb-3">
                     <label class="col-sm-3 col-form-label">Candidato 2</label>
                     <div class="col-sm-5">
@@ -189,11 +207,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <div class="row mb-6">
                     <label class="col-md-2 form-label">Logomarca</label>
-                    <div class="col-sm-6">
-                        <div class="panel-body">
-                            <img class="rounded mx-auto d-block" class="img-responsive"
-                                src="\cmas\fotos\<?php echo $c_logo2; ?>" class="img-fluid" style="height :250px" style="width:250px">
-                        </div>
+
+                    <div class="panel-body">
+                        <img class="rounded mx-auto d-block" class="img-responsive"
+                            src="\cmas\fotos\<?php echo $c_logo2; ?>" class="img-fluid" style="height :250px" style="width:250px">
+                    </div>
+
+                </div>
+                <div class="row mb-6">
+                    <label class="col-sm-3 col-form-label">Representante </label>
+                    <div class="col-sm-5">
+                        <input readonly type="text" maxlength="120" class="form-control"
+                            name="representante1" value="<?php echo $c_representante2 ?>">
                     </div>
                 </div>
                 <div class="row mb-3">

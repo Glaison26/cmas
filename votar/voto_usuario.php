@@ -108,6 +108,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <!--    CANDIDATO 1  --->
             <div class="container">
+                <div class="alert alert-info" align="center">
+                    <strong>Candidato 1</strong>
+                </div>
                 <div class="row mb-6">
                     <label class="col-sm-3 col-form-label">Candidato 1</label>
                     <div class="col-sm-5">
@@ -151,6 +154,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <hr>
                 <!--    CANDIDATO 2  --->
+                <div class="alert alert-info" align="center">
+                    <strong >Candidato 2</strong>
+                </div>
                 <div class="row mb-3">
                     <label class="col-sm-3 col-form-label">Candidato 2</label>
                     <div class="col-sm-5">
@@ -199,7 +205,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
         </form>
     </div>
-    
+
 </body>
 
 </html>
