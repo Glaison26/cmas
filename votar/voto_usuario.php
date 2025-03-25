@@ -13,6 +13,12 @@ $c_apresentacao2 = $_SESSION['apresentacao2'];
 $d_data =   date("Y-m-d");
 $c_agora = date('H:i');
 $msg_erro = "";
+// localizo o eleitor 
+$c_sql_eleitor  = "select cadastro_usuarios.nome from cadastro_usuarios where id='$_SESSION[id_eleitor]'";
+$result = $conection->query($c_sql_eleitor);
+$c_registro = $result->fetch_assoc();
+$c_eleitor = $c_registro['nome'];
+
 //echo $c_pasta1;
 // faço a inclusão dos votos
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -74,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>
 
     <div class="container -my5">
-    <?php
+        <?php
         if (!empty($msg_erro)) {
             echo "
             <div class='alert alert-danger' role='alert'>
@@ -89,9 +95,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <strong>Você deverá selecionar 2 (dois) Candidatos abaixo obrigatoriamente e clicar no botão finalizar para encerrar a votação</strong>
                 </div>
             </div>
+            <div class="container">
+                <div class="alert alert-primary">
+                    <div class="row mb-7">
+                        <label class="col-sm-5 col-form-label">Eleitor representante de Usuário da Assistência Social </label>
+                        <div class="col-sm-6">
+                            <input readonly type="text" maxlength="120" class="form-control" name="eleitor" value="<?php echo $c_eleitor ?>" required>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <!--    CANDIDATO 1  --->
             <div class="row mb-6">
-                <label class="col-sm-2 col-form-label">Selecione primeiro Candidato</label>
+                <label class="col-sm-3 col-form-label">Selecione primeiro Candidato</label>
                 <div class="col-sm-5">
                     <select onchange="verifica(value)" class="form-select form-select-lg mb-3" id="candidato1" name="candidato1" value="<?php echo $c_candidato1 ?>" required>
 
@@ -118,23 +135,23 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
             <div class="row mb-6">
                 <label class="col-md-2 form-label">Foto do primeiro candidato</label>
-                <div class="col-sm-6">
+                <div class="col-sm-7">
                     <div class="panel-body">
-                        <img class="rounded mx-auto d-block" class="img-responsive" src="\cmas\fotos\<?php echo $c_pasta1; ?>" class="img-fluid" style="height :200px" style="width:200px">
+                        <img class="rounded mx-auto d-block" class="img-responsive" src="\cmas\fotos\<?php echo $c_pasta1; ?>" class="img-fluid" style="height :250px" style="width:250px">
                     </div>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Apresentação</label>
                 <div class="col-sm-6">
-                    <textarea readonly class="form-control" id="apresentacao" name="apresentacao" rows="5"><?php echo $c_apresentacao1 ?></textarea>
+                    <textarea readonly class="form-control" id="apresentacao" name="apresentacao" rows="6"><?php echo $c_apresentacao1 ?></textarea>
                 </div>
             </div>
 
             <hr>
             <!--    CANDIDATO 2  --->
             <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Selecione segundo Candidato</label>
+                <label class="col-sm-3 col-form-label">Selecione segundo Candidato</label>
                 <div class="col-sm-5">
                     <select onchange="verifica2(value)" class="form-select form-select-lg mb-3" id="candidato2" name="candidato2" value="<?php echo $c_candidato1 ?>" required>
 
@@ -162,14 +179,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <label class="col-md-2 form-label">Foto do segundo candidato</label>
                 <div class="col-sm-6">
                     <div class="panel-body">
-                        <img class="rounded mx-auto d-block" class="img-responsive" src="\cmas\fotos\<?php echo $c_pasta2; ?>" class="img-fluid" style="height :200px" style="width:200px">
+                        <img class="rounded mx-auto d-block" class="img-responsive" src="\cmas\fotos\<?php echo $c_pasta2; ?>" class="img-fluid" style="height :250px" style="width:250px">
                     </div>
                 </div>
             </div>
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Apresentação</label>
-                <div class="col-sm-6">
-                    <textarea readonly class="form-control" id="apresentacao2" name="apresentacao2" rows="5"><?php echo $c_apresentacao2 ?></textarea>
+                <div class="col-sm-7">
+                    <textarea readonly class="form-control" id="apresentacao2" name="apresentacao2" rows="6"><?php echo $c_apresentacao2 ?></textarea>
                 </div>
             </div>
             <hr>

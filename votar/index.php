@@ -7,6 +7,8 @@ $_SESSION['foto2'] ="";
 $_SESSION['nome_candidato2'] ="";
 $_SESSION['apresentacao1']="";
 $_SESSION['apresentacao2']="";
+$_session['a_logo']="";
+$_session['logo2']="";
 ?>
 
 <!DOCTYPE html>
@@ -14,8 +16,6 @@ $_SESSION['apresentacao2']="";
 
 
 <body>
-
-
     <div class="container -my5">
         <div class="container">
             <div class="alert alert-success">
