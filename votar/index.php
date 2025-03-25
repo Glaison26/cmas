@@ -1,5 +1,12 @@
 <?php
+session_start();
 include("../cabecalho.php");
+$_SESSION['foto']='';
+$_SESSION['nome_candidato'] ="";
+$_SESSION['foto2'] ="";
+$_SESSION['nome_candidato2'] ="";
+$_SESSION['apresentacao1']="";
+$_SESSION['apresentacao2']="";
 ?>
 
 <!DOCTYPE html>

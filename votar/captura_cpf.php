@@ -46,7 +46,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // post do formulario com cpf´
                 $c_sql = "select count(*) as votou from votos_usuarios where id_eleitor='$i_id_leitor'";
                 $result = $conection->query($c_sql);
                 $registro = $result->fetch_assoc();
-                if ($votou > 0) {
+                if ($registro['votou'] > 0) {
                     $msg_erro = "CPF informado já realizou votação, favor verificar!!";
                     break;
                 }
@@ -129,7 +129,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // post do formulario com cpf´
             <hr>
             <div class="container -my5" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" align="left">
                 <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-circle-arrow-right'></span> Continuar</button>
-                <a class='btn btn-danger' href='/votar/index.php'><span class='glyphicon glyphicon-menu-left'></span> Voltar ao inicio</a>
+                <a class='btn btn-danger' href='/cmas/votar/index.php'><span class='glyphicon glyphicon-menu-left'></span> Voltar ao inicio</a>
             </div>
         </form>
 
