@@ -35,9 +35,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $c_tempo = $_POST['tempo'];
         $c_servico_programas = $_POST['servicos_programas'];
         $c_endereco = $_POST['endereco'];
-        $c_enderco_res = $_POST['endereco_res'];
+        $c_endereco_res = $_POST['endereco_res'];
         $c_telefone = $_POST['telefone'];
         $c_email = $_POST['email'];
+        $c_pasta_rg = "";
+        $c_pasta_cpf = "";
+        $c_pasta_declaracao = "";
         if ($_SESSION['c_tipo'] == 'C')
             $c_apresentacao = $_POST['apresentacao'];
         $dir = "documentos/";
@@ -53,22 +56,24 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $msg_erro = "CPF informado já possui cadastro, favor verificar!!";
             break;
         }
-        // captura rg
-        $arquivo_rg = $_FILES['arquivo_rg'];
-        move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_rg["name"]);
-        $c_pasta_rg =  $dir . $c_nome . '_' . $arquivo_rg["name"];
-        // captura cpf
-        $arquivo_cpf = $_FILES['arquivo_cpf'];
-        move_uploaded_file($arquivo_cpf["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_cpf["name"]);
-        $c_pasta_cpf =  $dir . $c_nome . '_'  . $arquivo_cpf["name"];
-        // captura declaracao
-        $arquivo_declaracao = $_FILES['arquivo_declaracao'];
-        move_uploaded_file($arquivo_declaracao["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_declaracao["name"]);
-        $c_pasta_declaracao = $dir . $c_nome . '_'  . $dir . $arquivo_declaracao["name"];
+        if ($_SESSION['c_tipo'] == 'C') {
+            // captura rg
+            $arquivo_rg = $_FILES['arquivo_rg'];
+            move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_rg["name"]);
+            $c_pasta_rg =  $dir . $c_nome . '_' . $arquivo_rg["name"];
+            // captura cpf
+            $arquivo_cpf = $_FILES['arquivo_cpf'];
+            move_uploaded_file($arquivo_cpf["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_cpf["name"]);
+            $c_pasta_cpf =  $dir . $c_nome . '_'  . $arquivo_cpf["name"];
+            // captura declaracao
+            $arquivo_declaracao = $_FILES['arquivo_declaracao'];
+            move_uploaded_file($arquivo_declaracao["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_declaracao["name"]);
+            $c_pasta_declaracao = $dir . $c_nome . '_'  . $arquivo_declaracao["name"];
+        }
 
         // gravo as informações na tabela trabaladores suas
-        $c_sql = "Insert into trabalhador_suas (nome,rg,cpf,cargo, nome_org, tempo_prestacao,tipo,foto,servicos_programas,endereco_instituicao, endereco_res,telefone,email,
-                doc_rg, doc_cpf, doc_declaracao, apresentacao) value ('$c_nome', '$c_rg', '$c_cargo', '$c_org', '$c_tempo', '$c_cpf', '$c_tipo', '$c_foto','$c_servico_programas', 
+        $c_sql = "Insert into trabalhador_suas (nome,rg,cpf,cargo, nome_org, tempo_prestacao,tipo,foto,servicos_programas, endereco_instituicao, endereco_res,telefone,email,
+                doc_rg, doc_cpf, doc_declaracao, apresentacao) value ('$c_nome', '$c_rg', '$c_cpf', '$c_cargo', '$c_org', '$c_tempo',  '$c_tipo', '$c_foto','$c_servico_programas', 
                 '$c_endereco', '$c_endereco_res', '$c_telefone', '$c_email', '$c_pasta_rg','$c_pasta_cpf','$c_pasta_declaracao', '$c_apresentacao' )";
 
         $result = $conection->query($c_sql);
@@ -208,7 +213,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <hr>
-            <div class="row mb-3">
+            <?php
+
+            if ($_SESSION['c_tipo'] == 'C')
+                echo '<div class="row mb-3">
                 <p>
                 <h5><strong>Obrigatório anexar Xerox de RG, CPF do candidato e declaração de trabalhador do<br>SUAS, emitido preg_last_error
                         respectivo serviço ou OSC (anexo VII) <strong></h5>
@@ -220,14 +228,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <p>
                 <h5><strong>Cópia de Rg<strong></h5>
                 </p>
-                <input type='file' name='arquivo_rg' class='form-control-file' id='arquivo_rg' required>
+                <input type="file" name="arquivo_rg" class="form-control-file" id="arquivo_rg" required>
             </div>
             <hr>
             <div class="row mb-3">
                 <p>
                 <h5><strong>CPF <strong></h5>
                 </p>
-                <input type='file' name='arquivo_cpf' class='form-control-file' id='arquivo_cpf' required>
+                <input type="file" name="arquivo_cpf" class="form-control-file" id="arquivo_cpf" required>
             </div>
 
 
@@ -236,9 +244,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <p>
                 <h5><strong>Declaração de trabalhador do SUAS, emitido pelo respectivo serviço ou OSC (anexo VII)<strong></h5>
                 </p>
-                <input type='file' name='arquivo_declaracao' class='form-control-file' id='arquivo_declaracao' required>
+                <input type="file" name="arquivo_declaracao" class="form-control-file" id="arquivo_declaracao" required>
             </div>
-            <hr>
+            <hr>';
+            ?>
 
 
             <div class="container-fluid" class="col-sm-1">

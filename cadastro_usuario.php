@@ -19,6 +19,10 @@ $c_endereco = "";
 $c_telefone = "";
 $c_email = "";
 $c_apresentacao = "";
+$c_pasta_rg = "";
+$c_pasta_cpf = "";
+$c_pasta_nis = "";
+$c_pasta_resumo = "";
 
 // rotina para inclusão das informações no banco de dados
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -43,29 +47,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
         // verifico via sql se cpf já não foi cadastrado
         $c_sql_pesquisa = "select count(*) as quantidade_cpf from cadastro_usuarios where cpf='$c_cpf'";
-        echo $c_sql_pesquisa;
+        //echo $c_sql_pesquisa;
         $result = $conection->query($c_sql_pesquisa);
         $registro = $result->fetch_assoc();
         if ($registro['quantidade_cpf'] > 0) {
             $msg_erro = "CPF informado já possui cadastro, favor verificar!!";
             break;
         }
-        // captura rg
-        $arquivo_rg = $_FILES['arquivo_rg'];
-        move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_rg["name"]);
-        $c_pasta_rg =  $dir . $c_nome . '_'  . $arquivo_rg["name"];
-        // captura cpf
-        $arquivo_cpf = $_FILES['arquivo_cpf'];
-        move_uploaded_file($arquivo_cpf["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_cpf["name"]);
-        $c_pasta_cpf =  $dir . $c_nome . '_'  . $arquivo_cpf["name"];
-        // captura nis
-        $arquivo_nis = $_FILES['arquivo_nis'];
-        move_uploaded_file($arquivo_nis["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_nis["name"]);
-        $c_pasta_nis =  $dir . $c_nome . '_'  . $arquivo_nis["name"];
-        // captura resumo
-        $arquivo_resumo = $_FILES['arquivo_resumo'];
-        move_uploaded_file($arquivo_resumo["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_resumo["name"]);
-        $c_pasta_resumo =  $dir . $c_nome . '_' . $arquivo_resumo["name"];
+        if ($_SESSION['c_tipo'] == 'C') {
+            // captura rg
+            $arquivo_rg = $_FILES['arquivo_rg'];
+            move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_rg["name"]);
+            $c_pasta_rg =  $dir . $c_nome . '_'  . $arquivo_rg["name"];
+            // captura cpf
+            $arquivo_cpf = $_FILES['arquivo_cpf'];
+            move_uploaded_file($arquivo_cpf["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_cpf["name"]);
+            $c_pasta_cpf =  $dir . $c_nome . '_'  . $arquivo_cpf["name"];
+            // captura nis
+            $arquivo_nis = $_FILES['arquivo_nis'];
+            move_uploaded_file($arquivo_nis["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_nis["name"]);
+            $c_pasta_nis =  $dir . $c_nome . '_'  . $arquivo_nis["name"];
+            // captura resumo
+            $arquivo_resumo = $_FILES['arquivo_resumo'];
+            move_uploaded_file($arquivo_resumo["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_resumo["name"]);
+            $c_pasta_resumo =  $dir . $c_nome . '_' . $arquivo_resumo["name"];
+        }
 
         // gravo as informações na tabela cadastro usuários
         $c_sql = "Insert into cadastro_usuarios (nome,rg,cpf,tipo,foto,nis,datanasc,servicos_programas,endereco,telefone,email, doc_rg, doc_cpf,doc_nis, doc_folha, apresentacao) 
@@ -171,6 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
 
             </div>
+
             <div class="row mb-10">
                 <p><strong>Serviço, programas ou projetos acessados e CRAS de referência</strong></p>
                 <div class="col-sm-8">
@@ -197,7 +204,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <input type="email" maxlength="120" class="form-control" name="email" value="<?php echo $c_email ?>" required>
                 </div>
             </div>
-            <hr>
+            <?php
+            if ($_SESSION['c_tipo'] == 'C')
+                echo '<hr>
             <div class="row mb-3">
                 <p>
                 <h5><strong>Anexar cópia RG, CPF do candidato, documento com número do NIS – Folha Resumo do Cadastro Único dos últimos dois anos<br>
@@ -210,21 +219,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <p>
                 <h5><strong>Cópia de Rg<strong></h5>
                 </p>
-                <input type='file' name='arquivo_rg' class='form-control-file' id='arquivo_rg' required>
+                <input type="file" name="arquivo_rg" class="form-control-file" id="arquivo_rg" required>
             </div>
             <hr>
             <div class="row mb-3">
                 <p>
                 <h5><strong>CPF <strong></h5>
                 </p>
-                <input type='file' name='arquivo_cpf' class='form-control-file' id='arquivo_cpf' required>
+                <input type="file" name="arquivo_cpf" class="form-control-file" id="arquivo_cpf" required>
             </div>
             <hr>
             <div class="row mb-3">
                 <p>
                 <h5><strong>Documento com número NIS<strong></h5>
                 </p>
-                <input type='file' name='arquivo_nis' class='form-control-file' id='arquivo_nis' required>
+                <input type="file" name="arquivo_nis" class="form-control-file" id="arquivo_nis" required>
             </div>
             <hr>
             <div class="row mb-3">
@@ -232,10 +241,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <h5><strong>Folha Resumo do Cadastro Único dos últimos dois anos e declaração de usuário do SUAS,
                         emitido pelo respectivo serviço ou OSC (Anexo VI)<strong></h5>
                 </p>
-                <input type='file' name='arquivo_resumo' class='form-control-file' id='arquivo_resumo' required>
+                <input type="file" name="arquivo_resumo" class="form-control-file" id="arquivo_resumo" required>
             </div>
-            <hr>
-
+            <hr>';
+            ?>
 
             <div class="container-fluid" class="col-sm-1">
                 <br>

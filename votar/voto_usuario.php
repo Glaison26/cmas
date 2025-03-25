@@ -25,7 +25,7 @@ include("../conexao.php");
         <form method="post">
             <div class="container">
                 <div class="alert alert-success">
-                    <strong> Você deverá selecionar 2 (dois) Candidatos abaixo obrigatoriamente e clicar no botão finalizar para finalizar a votação</strong>
+                    <strong>Você deverá selecionar 2 (dois) Candidatos abaixo obrigatoriamente e clicar no botão finalizar para finalizar a votação</strong>
                 </div>
             </div>
             <!--    CANDIDATO 1  --->

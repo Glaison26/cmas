@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // post do formulario com cpf´
                 // chamo votação
                 header('location: /cmas/votar/voto_suas.php');
             }
-            if ($i_quantidade > 0) {
+            if ($i_quantidade3 > 0) {
                 $_SESSION['categoria'] = 'osc';
                 $c_sql = "select id from organizacao where cpf=$c_cpf";
                 $result = $conection->query($c_sql);
