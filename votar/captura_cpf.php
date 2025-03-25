@@ -23,8 +23,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // post do formulario com cpf´
         $registro = $result->fetch_assoc();
         $i_quantidade2 = $registro['quantidade_cpf'];
         // procuro cpf no cadas de osc
-        // procuro cpf no cadastro de trabalhadores suas
-        $c_sql = "select count(*) as quantidade_cpf from organizacao where cpf=$c_cpf";
+        // procuro cpf no cadastro de trabalhadores organizações
+        $c_sql = "select count(*) as quantidade_cpf from organizacao where cnpj=$c_cpf";
         $result = $conection->query($c_sql);
         $registro = $result->fetch_assoc();
         $i_quantidade3 = $registro['quantidade_cpf'];
@@ -74,7 +74,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // post do formulario com cpf´
             }
             if ($i_quantidade3 > 0) {
                 $_SESSION['categoria'] = 'osc';
-                $c_sql = "select id from organizacao where cpf=$c_cpf";
+                $c_sql = "select id from organizacao where cnpj=$c_cpf";
                 $result = $conection->query($c_sql);
                 $registro = $result->fetch_assoc();
                 $_SESSION['id_eleitor'] = $registro['id'];
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // post do formulario com cpf´
                 $result = $conection->query($c_sql);
                 $registro = $result->fetch_assoc();
                 if ($votou > 0) {
-                    $msg_erro = "CPF informado já realizou votação, favor verificar!!";
+                    $msg_erro = "CNPJ informado já realizou votação, favor verificar!!";
                     break;
                 }
                 // chamo votação
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // post do formulario com cpf´
     <div class="container -my5">
 
         <div class="alert alert-success">
-            <strong>Informe o CPF do Eleitor e clique em continuar</strong>
+            <strong>Informe o CPF ou CNPJ do Eleitor e clique em continuar</strong>
         </div>
 
         <?php
@@ -121,9 +121,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') { // post do formulario com cpf´
 
         <form method="post">
             <div class="row mb-3">
-                <label class="col-sm-1 col-form-label">CPF</label>
+                <label class="col-sm-3 col-form-label">CPF ou CNPJ (somente OSC)</label>
                 <div class="col-sm-2">
-                    <input type="text" maxlength="14" class="form-control" name="cpf" value="<?php echo $c_cpf ?>" placeholder="somente números" required>
+                    <input type="text" maxlength="18" class="form-control" name="cpf" value="<?php echo $c_cpf ?>" placeholder="somente números" required>
                 </div>
             </div>
             <hr>

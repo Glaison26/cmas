@@ -5,11 +5,12 @@ include("../cabecalho.php");
 // conexão dom o banco de dados
 include("../conexao.php");
 $c_pasta1 = $_SESSION['foto'];
-$c_logo1 = $_SESSION['a_logo'];
+$c_logo1 = $_SESSION['logo'];
 $c_candidato1 = $_SESSION['nome_candidato'];
 $c_apresentacao1 = $_SESSION['apresentacao1'];
 //
 $c_pasta2 = $_SESSION['foto2'];
+$c_logo2 = $_SESSION['logo2'];
 $c_candidato2 = $_SESSION['nome_candidato2'];
 $c_apresentacao2 = $_SESSION['apresentacao2'];
 
@@ -82,7 +83,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </script>
 
     <div class="container -my5">
-    <?php
+        <?php
         if (!empty($msg_erro)) {
             echo "
             <div class='alert alert-danger' role='alert'>
@@ -107,104 +108,115 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     </div>
                 </div>
             </div>
-            <!--    CANDIDATO 1  --->
-            <div class="row mb-6">
-                <label class="col-sm-3 col-form-label">Selecione primeiro Candidato</label>
-                <div class="col-sm-5">
-                    <select onchange="verifica(value)" class="form-select form-select-lg mb-3" id="candidato1" name="candidato1" value="<?php echo $c_candidato1 ?>" required>
+            <div class="container">
+                <!--    CANDIDATO 1  --->
+                <div class="row mb-6">
+                    <label class="col-sm-3 col-form-label">Candidato 1</label>
+                    <div class="col-sm-5">
+                        <select onchange="verifica(value)" class="form-select form-select-lg mb-3" id="candidato1" name="candidato1" value="<?php echo $c_candidato1 ?>" required>
 
-                        <?php
+                            <?php
 
-                        echo "<option></option>";
-                        // select da tabela de executores
-                        $c_sql = "SELECT organizacao.nome_osc FROM organizacao where tipo = 'C' ORDER BY organizacao.nome_osc";
-                        $result = $conection->query($c_sql);
-                        while ($c_linha = $result->fetch_assoc()) {
-                            if (!empty($_SESSION['nome_candidato'])) {
-                                if ($_SESSION['nome_candidato'] == $c_linha['nome_osc'])
-                                    $op = 'selected';
-                                else
-                                    $op = "";
-                            }
-                            echo "  
+                            echo "<option></option>";
+                            // select da tabela de executores
+                            $c_sql = "SELECT organizacao.nome_osc FROM organizacao where tipo = 'C' ORDER BY organizacao.nome_osc";
+                            $result = $conection->query($c_sql);
+                            while ($c_linha = $result->fetch_assoc()) {
+                                if (!empty($_SESSION['nome_candidato'])) {
+                                    if ($_SESSION['nome_candidato'] == $c_linha['nome_osc'])
+                                        $op = 'selected';
+                                    else
+                                        $op = "";
+                                }
+                                echo "  
                           <option $op>$c_linha[nome_osc]</option>
                         ";
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div>
-            <div class="row mb-6">
-                <label class="col-md-2 form-label">Logomarca do primeiro candidato</label>
-                <div class="col-sm-6">
-                    <div class="panel-body">
-                        <img class="rounded mx-auto d-block" class="img-responsive" src="\cmas\fotos\<?php echo $c_logo1; ?>" class="img-fluid" style="height :250px" style="width:250px">
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-6">
-                <label class="col-md-2 form-label">Foto do primeiro candidato</label>
-                <div class="col-sm-6">
-                    <div class="panel-body">
-                        <img class="rounded mx-auto d-block" class="img-responsive" src="\cmas\fotos\<?php echo $c_pasta1; ?>" class="img-fluid" style="height :250px" style="width:250px">
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Apresentação</label>
-                <div class="col-sm-7">
-                    <textarea readonly class="form-control" id="apresentacao" name="apresentacao" rows="6"><?php echo $c_apresentacao1 ?></textarea>
-                </div>
-            </div>
-
-            <hr>
-            <!--    CANDIDATO 2  --->
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Selecione segundo Candidato</label>
-                <div class="col-sm-5">
-                    <select onchange="verifica2(value)" class="form-select form-select-lg mb-3" id="candidato2" name="candidato2" value="<?php echo $c_candidato1 ?>" required>
-
-                        <?php
-
-                        echo "<option></option>";
-                        // select da tabela de executores
-                        $c_sql = "SELECT organizacao.nome_osc FROM organizacao where tipo = 'C' ORDER BY organizacao.nome_osc";
-                        $result = $conection->query($c_sql);
-                        while ($c_linha = $result->fetch_assoc()) {
-                            if (!empty($_SESSION['nome_candidato2'])) {
-                                if ($_SESSION['nome_candidato2'] == $c_linha['nome_osc'])
-                                    $op = 'selected';
-                                else
-                                    $op = "";
                             }
-                            echo "  
-                          <option $op>$c_linha[nome_osc]</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-md-2 form-label">Foto do segundo candidato</label>
-                <div class="col-sm-6">
-                    <div class="panel-body">
-                        <img class="rounded mx-auto d-block" class="img-responsive" src="\cmas\fotos\<?php echo $c_pasta2; ?>" class="img-fluid" style="height :250px" style="width:250px">
+                            ?>
+                        </select>
                     </div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Apresentação</label>
-                <div class="col-sm-7">
-                    <textarea readonly class="form-control" id="apresentacao2" name="apresentacao2" rows="6"><?php echo $c_apresentacao2 ?></textarea>
+                <div class="row mb-6">
+                    <label class="col-md-2 form-label">Logomarca </label>
+                    <div class="col-sm-6">
+                        <div class="panel-body">
+                            <img class="rounded mx-auto d-block" class="img-responsive"
+                                src="\cmas\fotos\<?php echo $c_logo1; ?>" class="img-fluid" style="height :250px" style="width:250px">
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <hr>
-            <div class="row mb-3">
-                <div class="offset-sm-0 col-sm-3">
-                    <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-ok'></span> Finalizar</button>
-                    <a class='btn btn-danger' href='/cmas/votar/index.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                <div class="row mb-6">
+                    <label class="col-md-2 form-label">Foto do representante</label>
+                    <div class="col-sm-6">
+                        <div class="panel-body">
+                            <img class="rounded mx-auto d-block" class="img-responsive" src="\cmas\fotos\<?php echo $c_pasta1; ?>" class="img-fluid" style="height :250px" style="width:250px">
+                        </div>
+                    </div>
                 </div>
-            </div>
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Apresentação</label>
+                    <div class="col-sm-7">
+                        <textarea readonly class="form-control" id="apresentacao" name="apresentacao" rows="6"><?php echo $c_apresentacao1 ?></textarea>
+                    </div>
+                </div>
+
+                <hr>
+                <!--    CANDIDATO 2  --->
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Candidato 2</label>
+                    <div class="col-sm-5">
+                        <select onchange="verifica2(value)" class="form-select form-select-lg mb-3" id="candidato2" name="candidato2" value="<?php echo $c_candidato1 ?>" required>
+
+                            <?php
+
+                            echo "<option></option>";
+                            // select da tabela de executores
+                            $c_sql = "SELECT organizacao.nome_osc FROM organizacao where tipo = 'C' ORDER BY organizacao.nome_osc";
+                            $result = $conection->query($c_sql);
+                            while ($c_linha = $result->fetch_assoc()) {
+                                if (!empty($_SESSION['nome_candidato2'])) {
+                                    if ($_SESSION['nome_candidato2'] == $c_linha['nome_osc'])
+                                        $op = 'selected';
+                                    else
+                                        $op = "";
+                                }
+                                echo "  
+                          <option $op>$c_linha[nome_osc]</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-6">
+                    <label class="col-md-2 form-label">Logomarca</label>
+                    <div class="col-sm-6">
+                        <div class="panel-body">
+                            <img class="rounded mx-auto d-block" class="img-responsive"
+                                src="\cmas\fotos\<?php echo $c_logo2; ?>" class="img-fluid" style="height :250px" style="width:250px">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-md-2 form-label">Foto do representante</label>
+                    <div class="col-sm-6">
+                        <div class="panel-body">
+                            <img class="rounded mx-auto d-block" class="img-responsive" src="\cmas\fotos\<?php echo $c_pasta2; ?>" class="img-fluid" style="height :250px" style="width:250px">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Apresentação</label>
+                    <div class="col-sm-7">
+                        <textarea readonly class="form-control" id="apresentacao2" name="apresentacao2" rows="6"><?php echo $c_apresentacao2 ?></textarea>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mb-3">
+                    <div class="offset-sm-0 col-sm-3">
+                        <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-ok'></span> Finalizar</button>
+                        <a class='btn btn-danger' href='/cmas/votar/index.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                    </div>
+                </div>
         </form>
     </div>
 </body>

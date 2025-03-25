@@ -17,7 +17,7 @@ $result_foto1 = $conection->query($c_sql_foto1);
 $c_linha_foto1 = $result_foto1->fetch_assoc();
 
 $_SESSION['foto'] = $c_linha_foto1['foto'];
-$_session['logo'] = $c_linha_foto1['logo'];
+$_SESSION['logo'] = $c_linha_foto1['logo'];
 $_SESSION['apresentacao1'] = $c_linha_foto1['apresentacao'];
 $_SESSION['nome_candidato'] = $c_candidato;
 

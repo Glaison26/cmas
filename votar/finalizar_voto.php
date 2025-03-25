@@ -17,7 +17,7 @@ include("..\cabecalho.php");
         <div class="row mb-3">
             <div class="container">
                 <div class="alert alert-secondary">
-                    <h3><strong>Seu voto foi Computado com sucesso! Obrigado por participar do Processo!</strong></h3>
+                    <h3><strong>Seu voto foi computado com sucesso! Obrigado por participar do processo!</strong></h3>
                 </div>
             </div>
         </div>

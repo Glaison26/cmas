@@ -107,97 +107,99 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             </div>
 
             <!--    CANDIDATO 1  --->
-            <div class="row mb-6">
-                <label class="col-sm-3 col-form-label">Selecione primeiro Candidato</label>
-                <div class="col-sm-5">
-                    <select onchange="verifica(value)" class="form-select form-select-lg mb-3" id="candidato1" name="candidato1" value="<?php echo $c_candidato1 ?>" required>
+            <div class="container">
+                <div class="row mb-6">
+                    <label class="col-sm-3 col-form-label">Candidato 1</label>
+                    <div class="col-sm-5">
+                        <select onchange="verifica(value)" class="form-select form-select-lg mb-3" id="candidato1" name="candidato1" value="<?php echo $c_candidato1 ?>" required>
 
-                        <?php
+                            <?php
 
-                        echo "<option></option>";
-                        // select da tabela de executores
-                        $c_sql = "SELECT cadastro_usuarios.nome FROM cadastro_usuarios where tipo = 'C' ORDER BY cadastro_usuarios.nome";
-                        $result = $conection->query($c_sql);
-                        while ($c_linha = $result->fetch_assoc()) {
-                            if (!empty($_SESSION['nome_candidato'])) {
-                                if ($_SESSION['nome_candidato'] == $c_linha['nome'])
-                                    $op = 'selected';
-                                else
-                                    $op = "";
-                            }
-                            echo "  
+                            echo "<option></option>";
+                            // select da tabela de executores
+                            $c_sql = "SELECT cadastro_usuarios.nome FROM cadastro_usuarios where tipo = 'C' ORDER BY cadastro_usuarios.nome";
+                            $result = $conection->query($c_sql);
+                            while ($c_linha = $result->fetch_assoc()) {
+                                if (!empty($_SESSION['nome_candidato'])) {
+                                    if ($_SESSION['nome_candidato'] == $c_linha['nome'])
+                                        $op = 'selected';
+                                    else
+                                        $op = "";
+                                }
+                                echo "  
                           <option $op>$c_linha[nome]</option>
                         ";
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div>
-            <div class="row mb-6">
-                <label class="col-md-2 form-label">Foto do primeiro candidato</label>
-                <div class="col-sm-7">
-                    <div class="panel-body">
-                        <img class="rounded mx-auto d-block" class="img-responsive" src="\cmas\fotos\<?php echo $c_pasta1; ?>" class="img-fluid" style="height :250px" style="width:250px">
-                    </div>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Apresentação</label>
-                <div class="col-sm-6">
-                    <textarea readonly class="form-control" id="apresentacao" name="apresentacao" rows="6"><?php echo $c_apresentacao1 ?></textarea>
-                </div>
-            </div>
-
-            <hr>
-            <!--    CANDIDATO 2  --->
-            <div class="row mb-3">
-                <label class="col-sm-3 col-form-label">Selecione segundo Candidato</label>
-                <div class="col-sm-5">
-                    <select onchange="verifica2(value)" class="form-select form-select-lg mb-3" id="candidato2" name="candidato2" value="<?php echo $c_candidato1 ?>" required>
-
-                        <?php
-
-                        echo "<option></option>";
-                        // select da tabela de executores
-                        $c_sql = "SELECT cadastro_usuarios.nome FROM cadastro_usuarios where tipo = 'C' ORDER BY cadastro_usuarios.nome";
-                        $result = $conection->query($c_sql);
-                        while ($c_linha = $result->fetch_assoc()) {
-                            if (!empty($_SESSION['nome_candidato2'])) {
-                                if ($_SESSION['nome_candidato2'] == $c_linha['nome'])
-                                    $op = 'selected';
-                                else
-                                    $op = "";
                             }
-                            echo "  
-                          <option $op>$c_linha[nome]</option>";
-                        }
-                        ?>
-                    </select>
-                </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-md-2 form-label">Foto do segundo candidato</label>
-                <div class="col-sm-6">
-                    <div class="panel-body">
-                        <img class="rounded mx-auto d-block" class="img-responsive" src="\cmas\fotos\<?php echo $c_pasta2; ?>" class="img-fluid" style="height :250px" style="width:250px">
+                            ?>
+                        </select>
                     </div>
                 </div>
-            </div>
-            <div class="row mb-3">
-                <label class="col-sm-2 col-form-label">Apresentação</label>
-                <div class="col-sm-7">
-                    <textarea readonly class="form-control" id="apresentacao2" name="apresentacao2" rows="6"><?php echo $c_apresentacao2 ?></textarea>
+                <div class="row mb-6">
+                    <label class="col-md-2 form-label">Foto 1</label>
+                    <div class="col-sm-7">
+                        <div class="panel-body">
+                            <img class="rounded mx-auto d-block" class="img-responsive" src="\cmas\fotos\<?php echo $c_pasta1; ?>" class="img-fluid" style="height :250px" style="width:250px">
+                        </div>
+                    </div>
                 </div>
-            </div>
-            <hr>
-            <div class="row mb-3">
-                <div class="offset-sm-0 col-sm-3">
-                    <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-ok'></span> Finalizar</button>
-                    <a class='btn btn-danger' href='/cmas/votar/index.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Apresentação</label>
+                    <div class="col-sm-6">
+                        <textarea readonly class="form-control" id="apresentacao" name="apresentacao" rows="6"><?php echo $c_apresentacao1 ?></textarea>
+                    </div>
                 </div>
-            </div>
+
+                <hr>
+                <!--    CANDIDATO 2  --->
+                <div class="row mb-3">
+                    <label class="col-sm-3 col-form-label">Candidato 2</label>
+                    <div class="col-sm-5">
+                        <select onchange="verifica2(value)" class="form-select form-select-lg mb-3" id="candidato2" name="candidato2" value="<?php echo $c_candidato1 ?>" required>
+
+                            <?php
+
+                            echo "<option></option>";
+                            // select da tabela de executores
+                            $c_sql = "SELECT cadastro_usuarios.nome FROM cadastro_usuarios where tipo = 'C' ORDER BY cadastro_usuarios.nome";
+                            $result = $conection->query($c_sql);
+                            while ($c_linha = $result->fetch_assoc()) {
+                                if (!empty($_SESSION['nome_candidato2'])) {
+                                    if ($_SESSION['nome_candidato2'] == $c_linha['nome'])
+                                        $op = 'selected';
+                                    else
+                                        $op = "";
+                                }
+                                echo "  
+                          <option $op>$c_linha[nome]</option>";
+                            }
+                            ?>
+                        </select>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-md-2 form-label">Foto </label>
+                    <div class="col-sm-6">
+                        <div class="panel-body">
+                            <img class="rounded mx-auto d-block" class="img-responsive" src="\cmas\fotos\<?php echo $c_pasta2; ?>" class="img-fluid" style="height :250px" style="width:250px">
+                        </div>
+                    </div>
+                </div>
+                <div class="row mb-3">
+                    <label class="col-sm-2 col-form-label">Apresentação</label>
+                    <div class="col-sm-7">
+                        <textarea readonly class="form-control" id="apresentacao2" name="apresentacao2" rows="6"><?php echo $c_apresentacao2 ?></textarea>
+                    </div>
+                </div>
+                <hr>
+                <div class="row mb-3">
+                    <div class="offset-sm-0 col-sm-3">
+                        <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-ok'></span> Finalizar</button>
+                        <a class='btn btn-danger' href='/cmas/votar/index.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
+                    </div>
+                </div>
         </form>
     </div>
+    
 </body>
 
 </html>

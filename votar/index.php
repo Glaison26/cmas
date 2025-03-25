@@ -7,8 +7,8 @@ $_SESSION['foto2'] ="";
 $_SESSION['nome_candidato2'] ="";
 $_SESSION['apresentacao1']="";
 $_SESSION['apresentacao2']="";
-$_session['a_logo']="";
-$_session['logo2']="";
+$_SESSION['logo']="";
+$_SESSION['logo2']="";
 ?>
 
 <!DOCTYPE html>
