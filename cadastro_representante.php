@@ -187,9 +187,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <div class="row mb-10">
-                <p><strong>Serviço, programas ou projetos acessados e CRAS de referência</strong></p>
+                <p><strong>Serviço, programas ou projetos que atua</strong></p>
                 <div class="col-sm-8">
-                    <textarea class="form-control" id="motivo" name="servicos_programas" rows="5"><?php echo $c_servico_programas ?></textarea>
+                    <textarea class="form-control" id="servicos_programas" name="servicos_programas" rows="5"><?php echo $c_servico_programas ?></textarea>
                 </div>
             </div>
             <hr>

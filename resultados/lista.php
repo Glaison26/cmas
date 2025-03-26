@@ -37,10 +37,10 @@ FROM organizacao";
     <div class="container -my5">
         <div class="container">
             <div class="alert alert-success">
-                <strong> Prefeitura Municipal de Sabará - Pagina Inicial da plataforma.</strong>
+                <strong>Lista de Cadastrados. Clique em resultados da votação para ver os resultados do pleito</strong>
             </div>
-            <div  class="topnav">
-                <a class='btn btn btn-sm'  href='\cmas\resultados\resultado.php'><img src='\cmas\imagens\oto.png' alt='' width='25' height='25'> Resultados da Votação</a>
+            <div class="topnav">
+                <a class='btn btn btn-sm' href='\cmas\resultados\resultados.php'><img src='\cmas\imagens\oto.png' alt='' width='25' height='25'> Resultados da Votação</a>
             </div>
             <hr>
             <!-- abas de lista dos cadastros realizados -->
@@ -72,7 +72,6 @@ FROM organizacao";
 
                                 // insiro os registro do banco de dados na tabela 
                                 while ($c_linha = $result->fetch_assoc()) {
-
                                     echo "
                                 <tr>
                                     <td>$c_linha[nome]</td>
