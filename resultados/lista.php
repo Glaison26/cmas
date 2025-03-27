@@ -10,14 +10,14 @@ case
 when cadastro_usuarios.tipo='C' then 'Candidato'
 when cadastro_usuarios.tipo='E' then 'Eleitor'
 END AS categoria
-FROM cadastro_usuarios";
+FROM cadastro_usuarios order by cadastro_usuarios.nome";
 // sql para trabalhadores suas
 $c_sql_suas = "SELECT trabalhador_suas.nome, trabalhador_suas.cpf, trabalhador_suas.tipo, 
 case
 when trabalhador_suas.tipo='C' then 'Candidato'
 when trabalhador_suas.tipo='E' then 'Eleitor'
 END AS categoria
-FROM trabalhador_suas";
+FROM trabalhador_suas order by nome";
 // sql para organizações da sociedade civil
 $c_sql_osc = "SELECT organizacao.nome_osc, organizacao.cpf, organizacao.tipo, organizacao.cnpj, 
 organizacao.telefone,organizacao.nome_representante,
@@ -25,12 +25,146 @@ case
 when organizacao.tipo='C' then 'Candidato'
 when organizacao.tipo='E' then 'Eleitor'
 END AS categoria
-FROM organizacao";
+FROM organizacao order by nome_osc";
 
 ?>
 
 <!DOCTYPE html>
 <html lang="en">
+
+<script>
+    $(document).ready(function() {
+        $('.tabusuarios').DataTable({
+            // 
+            "iDisplayLength": -1,
+            "order": [1, 'asc'],
+            "aoColumnDefs": [{
+                'bSortable': false,
+                'aTargets': [2]
+            }, {
+                'aTargets': [0],
+                "visible": true
+            }],
+            "oLanguage": {
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sLengthMenu": "_MENU_ resultados por página",
+                "sInfoFiltered": " - filtrado de _MAX_ registros",
+                "oPaginate": {
+                    "spagingType": "full_number",
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLoadingRecords": "Carregando...",
+                    "sProcessing": "Processando...",
+                    "sZeroRecords": "Nenhum registro encontrado",
+
+                    "sLast": "Último"
+                },
+                "sSearch": "Pesquisar",
+                "sLengthMenu": 'Mostrar <select>' +
+                    '<option value="5">5</option>' +
+                    '<option value="10">10</option>' +
+                    '<option value="20">20</option>' +
+                    '<option value="30">30</option>' +
+                    '<option value="40">40</option>' +
+                    '<option value="50">50</option>' +
+                    '<option value="-1">Todos</option>' +
+                    '</select> Registros'
+            }
+        });
+
+    });
+</script>
+
+
+<script>
+    $(document).ready(function() {
+        $('.tabsuas').DataTable({
+            // 
+            "iDisplayLength": -1,
+            "order": [1, 'asc'],
+            "aoColumnDefs": [{
+                'bSortable': false,
+                'aTargets': [2]
+            }, {
+                'aTargets': [0],
+                "visible": true
+            }],
+            "oLanguage": {
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sLengthMenu": "_MENU_ resultados por página",
+                "sInfoFiltered": " - filtrado de _MAX_ registros",
+                "oPaginate": {
+                    "spagingType": "full_number",
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLoadingRecords": "Carregando...",
+                    "sProcessing": "Processando...",
+                    "sZeroRecords": "Nenhum registro encontrado",
+
+                    "sLast": "Último"
+                },
+                "sSearch": "Pesquisar",
+                "sLengthMenu": 'Mostrar <select>' +
+                    '<option value="5">5</option>' +
+                    '<option value="10">10</option>' +
+                    '<option value="20">20</option>' +
+                    '<option value="30">30</option>' +
+                    '<option value="40">40</option>' +
+                    '<option value="50">50</option>' +
+                    '<option value="-1">Todos</option>' +
+                    '</select> Registros'
+            }
+        });
+
+    });
+</script>
+
+<script>
+    $(document).ready(function() {
+        $('.tabosc').DataTable({
+            // 
+            "iDisplayLength": -1,
+            "order": [1, 'asc'],
+            "aoColumnDefs": [{
+                'bSortable': false,
+                'aTargets': [2]
+            }, {
+                'aTargets': [0],
+                "visible": true
+            }],
+            "oLanguage": {
+                "sInfo": "Mostrando de _START_ até _END_ de _TOTAL_ registros",
+                "sLengthMenu": "_MENU_ resultados por página",
+                "sInfoFiltered": " - filtrado de _MAX_ registros",
+                "oPaginate": {
+                    "spagingType": "full_number",
+                    "sNext": "Próximo",
+                    "sPrevious": "Anterior",
+                    "sFirst": "Primeiro",
+                    "sLoadingRecords": "Carregando...",
+                    "sProcessing": "Processando...",
+                    "sZeroRecords": "Nenhum registro encontrado",
+
+                    "sLast": "Último"
+                },
+                "sSearch": "Pesquisar",
+                "sLengthMenu": 'Mostrar <select>' +
+                    '<option value="5">5</option>' +
+                    '<option value="10">10</option>' +
+                    '<option value="20">20</option>' +
+                    '<option value="30">30</option>' +
+                    '<option value="40">40</option>' +
+                    '<option value="50">50</option>' +
+                    '<option value="-1">Todos</option>' +
+                    '</select> Registros'
+            }
+        });
+
+    });
+</script>
+
 
 
 <body>
@@ -41,6 +175,7 @@ FROM organizacao";
             </div>
             <div class="topnav">
                 <a class='btn btn btn-sm' href='\cmas\resultados\resultados.php'><img src='\cmas\imagens\oto.png' alt='' width='25' height='25'> Resultados da Votação</a>
+                <a class="btn btn-btn-sm" href="\cmas\resultados\index.php"><img src='\cmas\imagens\back.png' alt='' width='25' height='25'> Voltar</a>
             </div>
             <hr>
             <!-- abas de lista dos cadastros realizados -->

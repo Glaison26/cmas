@@ -186,7 +186,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
                 <label class="col-sm-1 col-form-label">CNPJ </label>
                 <div class="col-sm-2">
-                    <input type="text" maxlength="14" class="form-control" name="cnpj" value="<?php echo $c_cnpj ?>" placeholder="somente números" required>
+                    <input type="text" pattern="[0-9]+$" maxlength="14" class="form-control" name="cnpj" value="<?php echo $c_cnpj ?>" placeholder="somente números" required>
                 </div>
             </div>
 
@@ -211,7 +211,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
                 <label class="col-sm-1 col-form-label">CPF </label>
                 <div class="col-sm-2">
-                    <input type="text" maxlength="14" class="form-control" name="cpf" value="<?php echo $c_cpf ?>" placeholder="somente números" required>
+                    <input type="text" pattern="[0-9]+$" maxlength="14" class="form-control" name="cpf" value="<?php echo $c_cpf ?>" placeholder="somente números" required>
                 </div>
             </div>
             <div class="row mb-3">

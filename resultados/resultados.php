@@ -22,6 +22,7 @@ GROUP BY votos_osc.id_candidato";
 
 <!DOCTYPE html>
 <html lang="en">
+    
 
 <body>
     <div class="container -my5">
@@ -30,6 +31,10 @@ GROUP BY votos_osc.id_candidato";
                 <strong>Resultados da Eleição do CMAS</strong>
             </div>
         </div>
+        <div class="topnav">
+            <a class="btn btn-btn-sm" href="\cmas\resultados\lista.php"><img src='\cmas\imagens\back.png' alt='' width='25' height='25'> Voltar</a>
+        </div>
+        <hr>
         <!-- abas de lista de votações realizados -->
         <ul class="nav nav-tabs nav-tabs-responsive" role="tablist">
             <li role="presentation" class="active"><a href="#usuarios" aria-controls="usuarios" role="tab" data-toggle="tab">Usuários do SUAS</a></li>
