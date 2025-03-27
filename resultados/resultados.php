@@ -22,7 +22,7 @@ GROUP BY votos_osc.id_candidato";
 
 <!DOCTYPE html>
 <html lang="en">
-    
+
 
 <body>
     <div class="container -my5">
@@ -228,6 +228,47 @@ GROUP BY votos_osc.id_candidato";
                     </table>
                 </div>
             </div>
+            <!--gráficos de usuários -->
+            <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+            <script type="text/javascript">
+                // gráfico por Valor
+                google.charts.load('current', {
+                    'packages': ['corechart']
+                });
+                google.charts.setOnLoadCallback(drawChart);
+
+                function drawChart() {
+
+                    var data = google.visualization.arrayToDataTable([
+                        ['Candidato', 'Votos'],
+
+                        <?php
+                        $result_grafico = $conection->query($c_sql_osc);
+                        // percorre resultado da query para para montar gráfico
+                        while ($registro = $result_grafico->fetch_assoc()) {
+                            $c_candidato = $registro['nome_osc'];
+                            $c_votos =  $registro['total'];
+                        ?>['<?php echo $c_candidato ?>', <?php echo $c_votos ?>],
+                        <?php } ?>
+                    ]);
+
+                    var options = {
+                        is3D: true
+
+                    };
+
+                    var chart = new google.visualization.PieChart(document.getElementById('chart3'));
+
+                    chart.draw(data, options);
+                }
+            </script>
+            <hr>
+            <div style="padding-left:200px;">
+                <h3 class="text-center">Gráfico de Votação Trabalhadores SUAS</h3>
+                <div id="chart3" style="width: 800px; height: 600px;"></div>
+            </div>
+            <!-- fim de gráficos de usuários -->
+
         </div>
 
 
