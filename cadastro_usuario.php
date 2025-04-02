@@ -23,6 +23,7 @@ $c_pasta_rg = "";
 $c_pasta_cpf = "";
 $c_pasta_nis = "";
 $c_pasta_resumo = "";
+$c_pasta_declaracao = "";
 
 // rotina para inclusão das informações no banco de dados
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
@@ -71,12 +72,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $arquivo_resumo = $_FILES['arquivo_resumo'];
             move_uploaded_file($arquivo_resumo["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_resumo["name"]);
             $c_pasta_resumo =  $dir . $c_nome . '_' . $arquivo_resumo["name"];
+            // captura declaração
+            $arquivo_declaracao = $_FILES['arquivo_declaracao'];
+            move_uploaded_file($arquivo_declaracao["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_declaracao["name"]);
+            $c_pasta_declaracao =  $dir . $c_nome . '_' . $arquivo_declaracao["name"];
         }
 
         // gravo as informações na tabela cadastro usuários
-        $c_sql = "Insert into cadastro_usuarios (nome,rg,cpf,tipo,foto,nis,datanasc,servicos_programas,endereco,telefone,email, doc_rg, doc_cpf,doc_nis, doc_folha, apresentacao) 
+        $c_sql = "Insert into cadastro_usuarios (nome,rg,cpf,tipo,foto,nis,datanasc,servicos_programas,endereco,telefone,email, doc_rg, doc_cpf,doc_nis, doc_folha, apresentacao, doc_declaracao) 
                 value ('$c_nome', '$c_rg', '$c_cpf', '$c_tipo', '$c_foto', '$c_nis', '$d_datanasc', '$c_servico_programas', 
-                '$c_endereco', '$c_telefone', '$c_email', '$c_pasta_rg','$c_pasta_cpf','$c_pasta_nis','$c_pasta_resumo', '$c_apresentacao' )";
+                '$c_endereco', '$c_telefone', '$c_email', '$c_pasta_rg','$c_pasta_cpf','$c_pasta_nis','$c_pasta_resumo', '$c_apresentacao', '$c_pasta_declaracao')";
 
         $result = $conection->query($c_sql);
         // verifico se a query foi correto
@@ -195,7 +200,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="row mb-3">
                 <label class="col-sm-2 col-form-label">Telefone</label>
                 <div class="col-sm-2">
-                    <input type="tel" onkeyup="handlePhone(event)" maxlength="25" class="form-control" name="telefone" placeholder="(XX) XXXX-XXXX" value="<?php echo $c_telefone ?>" required>
+                    <input type="tel" onkeyup="handlePhone(event)" maxlength="20" class="form-control" name="telefone" placeholder="(XX) XXXX-XXXX" value="<?php echo $c_telefone ?>" required>
                 </div>
             </div>
             <div class="row mb-3">
@@ -217,31 +222,37 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
             <div class="row mb-3">
                 <p>
-                <h5><strong>Cópia de Rg<strong></h5>
+                <h5><strong>Cópia de Rg</strong></h5>
                 </p>
                 <input type="file" name="arquivo_rg" class="form-control-file" id="arquivo_rg" required>
             </div>
             <hr>
             <div class="row mb-3">
                 <p>
-                <h5><strong>CPF <strong></h5>
+                <h5><strong>CPF </strong></h5>
                 </p>
                 <input type="file" name="arquivo_cpf" class="form-control-file" id="arquivo_cpf" required>
             </div>
             <hr>
             <div class="row mb-3">
                 <p>
-                <h5><strong>Documento com número NIS<strong></h5>
+                <h5><strong>Documento com número NIS</strong></h5>
                 </p>
                 <input type="file" name="arquivo_nis" class="form-control-file" id="arquivo_nis" required>
             </div>
             <hr>
             <div class="row mb-3">
                 <p>
-                <h5><strong>Folha Resumo do Cadastro Único dos últimos dois anos e declaração de usuário do SUAS,
-                        emitido pelo respectivo serviço ou OSC (Anexo VI)<strong></h5>
+                <h5><strong>Folha Resumo do Cadastro Único dos últimos dois anos</strong></h5>
                 </p>
                 <input type="file" name="arquivo_resumo" class="form-control-file" id="arquivo_resumo" required>
+            </div>
+            <hr>
+            <div class="row mb-3">
+                <p>
+                <h5><strong>Declaração de usuário do SUAS, emitido pelo respectivo serviço ou OSC (Anexo VI)</strong></h5>
+                </p>
+                <input type="file" name="arquivo_declaracao" class="form-control-file" id="arquivo_declaracao" required>
             </div>
             <hr>';
             ?>

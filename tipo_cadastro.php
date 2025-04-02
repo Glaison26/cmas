@@ -53,7 +53,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <h5>Eu sou :</h5>
                     </p>
                     <div class="form-check">
-                        <input type="radio" name="tipo" id="tipoeleitor" Value="E" checked>
+                        <input type="radio" name="tipo" id="tipoeleitor" Value="E" required>
                         <label class="form-check-label" for="tipoeleitor">
                             Eleitor
                         </label>
@@ -72,7 +72,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                     <h5>Tipo :</h5>
                     </p>
                     <div class="form-check">
-                        <input type="radio" name="selecao" id="tipo_org" Value="0" checked>
+                        <input type="radio" name="selecao" id="tipo_org" Value="0" required>
                         <label class="form-check-label" for="tipo_org">
                             Organização da Sociedade Civil de Assistência Social
                         </label>
