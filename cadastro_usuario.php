@@ -55,7 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $msg_erro = "CPF informado já possui cadastro, favor verificar!!";
             break;
         }
-        if ($_SESSION['c_tipo'] == 'C') {
+        if ($_SESSION['c_tipo'] == 'C') { // somente candidato
             // captura rg
             $arquivo_rg = $_FILES['arquivo_rg'];
             move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_rg["name"]);
@@ -76,7 +76,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $arquivo_declaracao = $_FILES['arquivo_declaracao'];
             move_uploaded_file($arquivo_declaracao["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_declaracao["name"]);
             $c_pasta_declaracao =  $dir . $c_nome . '_' . $arquivo_declaracao["name"];
+        } else {  // somente eleitor
+            // captura rg
+            $arquivo_rg = $_FILES['arquivo_rg'];
+            move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_rg["name"]);
+            $c_pasta_rg =  $dir . $c_nome . '_'  . $arquivo_rg["name"];
+            // captura declaração
+            $arquivo_declaracao = $_FILES['arquivo_declaracao'];
+            move_uploaded_file($arquivo_declaracao["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_declaracao["name"]);
+            $c_pasta_declaracao =  $dir . $c_nome . '_' . $arquivo_declaracao["name"];
         }
+
 
         // gravo as informações na tabela cadastro usuários
         $c_sql = "Insert into cadastro_usuarios (nome,rg,cpf,tipo,foto,nis,datanasc,servicos_programas,endereco,telefone,email, doc_rg, doc_cpf,doc_nis, doc_folha, apresentacao, doc_declaracao) 
@@ -210,7 +220,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </div>
             </div>
             <?php
-            if ($_SESSION['c_tipo'] == 'C')
+            if ($_SESSION['c_tipo'] == 'C') // aparece apenas para candidato
                 echo '<hr>
             <div class="row mb-3">
                 <p>
@@ -255,6 +265,30 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="file" name="arquivo_declaracao" class="form-control-file" id="arquivo_declaracao" required>
             </div>
             <hr>';
+            else // aparece para eleitor
+                echo '<hr>
+            <div class="row mb-3">
+                <p>
+                <h5><strong>Anexar cópia RG,  e declaração de usuário do SUAS, emitido pelo respectivo serviço ou OSC (Anexo VI)<strong></h5>
+                </p>
+
+            </div>
+
+            <div class="row mb-3">
+                <p>
+                <h5><strong>Cópia de Rg</strong></h5>
+                </p>
+                <input type="file" name="arquivo_rg" class="form-control-file" id="arquivo_rg" required>
+            </div>
+            <hr>
+            <div class="row mb-3">
+                <p>
+                <h5><strong>Declaração de usuário do SUAS, emitido pelo respectivo serviço ou OSC (Anexo VI)</strong></h5>
+                </p>
+                <input type="file" name="arquivo_declaracao" class="form-control-file" id="arquivo_declaracao" required>
+            </div>
+            <hr>';
+
             ?>
 
             <div class="container-fluid" class="col-sm-1">

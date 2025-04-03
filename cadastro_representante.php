@@ -69,6 +69,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $arquivo_declaracao = $_FILES['arquivo_declaracao'];
             move_uploaded_file($arquivo_declaracao["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_declaracao["name"]);
             $c_pasta_declaracao = $dir . $c_nome . '_'  . $arquivo_declaracao["name"];
+        } else {
+            // captura rg
+            $arquivo_rg = $_FILES['arquivo_rg'];
+            move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_rg["name"]);
+            $c_pasta_rg =  $dir . $c_nome . '_' . $arquivo_rg["name"];
+            // captura declaracao
+            $arquivo_declaracao = $_FILES['arquivo_declaracao'];
+            move_uploaded_file($arquivo_declaracao["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_declaracao["name"]);
+            $c_pasta_declaracao = $dir . $c_nome . '_'  . $arquivo_declaracao["name"];
         }
 
         // gravo as informações na tabela trabaladores suas
@@ -215,10 +224,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <hr>
             <?php
 
-            if ($_SESSION['c_tipo'] == 'C')
+            if ($_SESSION['c_tipo'] == 'C')  // documentos para candidato
                 echo '<div class="row mb-3">
                 <p>
-                <h5><strong>Obrigatório anexar Xerox de RG, CPF do candidato e declaração de trabalhador do<br>SUAS, emitido preg_last_error
+                <h5><strong>Obrigatório anexar Xerox de RG, CPF do candidato e declaração de trabalhador do<br>SUAS, emitido pelo
                         respectivo serviço ou OSC (anexo VII) <strong></h5>
                 </p>
 
@@ -237,8 +246,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </p>
                 <input type="file" name="arquivo_cpf" class="form-control-file" id="arquivo_cpf" required>
             </div>
-
-
             <hr>
             <div class="row mb-3">
                 <p>
@@ -247,6 +254,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 <input type="file" name="arquivo_declaracao" class="form-control-file" id="arquivo_declaracao" required>
             </div>
             <hr>';
+            else // documentos para Eeleitores
+                echo '<div class="row mb-3">
+                <p>
+                <h5><strong>Obrigatório anexar Xerox de RG, e declaração de trabalhador do SUAS, emitido pelo
+                        respectivo serviço ou OSC (anexo VII) <strong></h5>
+                </p>
+
+            </div>
+            <hr>
+            <div class="row mb-3">
+                <p>
+                <h5><strong>Cópia de Rg<strong></h5>
+                </p>
+                <input type="file" name="arquivo_rg" class="form-control-file" id="arquivo_rg" required>
+            </div>
+            <hr>
+            <div class="row mb-3">
+                <p>
+                <h5><strong>Declaração de trabalhador do SUAS, emitido pelo respectivo serviço ou OSC (anexo VII)<strong></h5>
+                </p>
+                <input type="file" name="arquivo_declaracao" class="form-control-file" id="arquivo_declaracao" required>
+            </div><hr>';
+
             ?>
 
 
