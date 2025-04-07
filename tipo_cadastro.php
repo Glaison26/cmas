@@ -5,6 +5,7 @@ session_start();
 include("conexao.php");
 include("cabecalho.php");
 $_SESSION['c_nomefoto'] = "";
+$_SESSION['c_nomefoto_osc'] = "";
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $_SESSION['c_selecao'] = $_POST['selecao'];
