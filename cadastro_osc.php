@@ -85,6 +85,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $arquivo_comprovante = $_FILES['arquivo_comprovante'];
             move_uploaded_file($arquivo_comprovante["tmp_name"], "$dir/" . $c_osa_nome . '_' . $arquivo_comprovante["name"]);
             $c_pasta_comprovante = $dir . $c_osa_nome . '_' . $arquivo_comprovante["name"];
+        } else {
+            // captura rg
+            $arquivo_rg = $_FILES['arquivo_rg'];
+            move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_osa_nome . '_' . $arquivo_rg["name"]);
+            $c_pasta_rg =  $dir . $c_osa_nome . '_' . $arquivo_rg["name"];
         }
 
         // gravo as informações na tabela trabaladores suas
@@ -258,9 +263,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </p>
                 <input type="file" name="arquivo_comprovante" class="form-control-file" id="arquivo_comprovante" required>
             </div>';
+            else
+                echo '
+            <hr>
+            <div class="row mb-3">
+                <p>
+                <h5><strong>Obrigatório anexar cópia de RG do representante OSC. </strong></h5>
+                </p>
+
+            </div><hr>
+             <div class="row mb-3">
+                <p>
+                <h5><strong>Cópia de Rg<strong></h5>
+                </p>
+                <input type="file" name="arquivo_rg" class="form-control-file" id="arquivo_rg" required>
+            </div>
+            ';
             ?>
 
-            <div class="container-fluid" class="col-sm-1">
+            <div class="container-fluid" class="col-sm-0">
                 <br>
                 <button type="submit" class="btn btn-primary"><span class='glyphicon glyphicon-floppy-saved'></span> Salvar</button>
                 <a class='btn btn-danger' href='/cmas/index.php'><span class='glyphicon glyphicon-remove'></span> Cancelar</a>
