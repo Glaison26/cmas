@@ -42,9 +42,11 @@ CREATE TABLE IF NOT EXISTS `cadastro_usuarios` (
   `doc_declaracao` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `apresentacao` blob,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela cmas.cadastro_usuarios: ~0 rows (aproximadamente)
+-- Copiando dados para a tabela cmas.cadastro_usuarios: ~1 rows (aproximadamente)
+INSERT INTO `cadastro_usuarios` (`id`, `nome`, `tipo`, `foto`, `rg`, `cpf`, `nis`, `datanasc`, `servicos_programas`, `endereco`, `telefone`, `email`, `categoria`, `doc_rg`, `doc_cpf`, `doc_nis`, `doc_folha`, `doc_declaracao_suas`, `doc_declaracao`, `apresentacao`) VALUES
+	(3, 'Glaison Queiroz', 'C', '9A7E429F-2ABD-44B8-A0A3-941FA210559E.jpeg1036.jpeg', 'm4662097', '69551022653', '23', '2025-04-03', _binary 0x7465737465, 'Rua da Intendencia 316 centro sabara', '(31) 4654-6546', 'arthurgomesosg@gmail.com', NULL, 'documentos/Glaison Queiroz_20210923_115914.jpg9446.jpg', 'documentos/Glaison Queiroz_ADAO.jpg7235.jpg', 'documentos/Glaison Queiroz_7.jpg9482.jpg', 'documentos/Glaison Queiroz_Digitalizado_20210923-1900.pdf844.pdf', NULL, 'documentos/Glaison Queiroz_Digitalizado_20210923-1901.pdf3461.pdf', _binary 0x7465737465);
 
 -- Copiando estrutura para tabela cmas.organizacao
 CREATE TABLE IF NOT EXISTS `organizacao` (
@@ -70,7 +72,7 @@ CREATE TABLE IF NOT EXISTS `organizacao` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
--- Copiando dados para a tabela cmas.organizacao: ~1 rows (aproximadamente)
+-- Copiando dados para a tabela cmas.organizacao: ~0 rows (aproximadamente)
 INSERT INTO `organizacao` (`id`, `nome_osc`, `tipo`, `numero_cmas`, `cnpj`, `fundacao`, `endereco_osc`, `nome_representante`, `rg`, `cpf`, `endereco`, `telefone`, `email`, `doc_rg`, `doc_cpf`, `doc_comprovante`, `foto`, `logo`, `apresentacao`) VALUES
 	(8, 'Aline e Manoel Eletrônica Ltda', 'E', '33', '01088710000188', '2025-03-05', 'rua teste', 'Antonio da Silva', 'm4662097', '69551022653', 'Rua da Intendencia 316 centro sabara', '(31) 4654-6546', 'arthurgomesosg@gmail.com', '', '', '', '', '', _binary '');
 
