@@ -187,6 +187,7 @@ FROM organizacao order by nome_osc";
             <div class="tab-content">
                 <!-- aba usuários suas-->
                 <div role="tabpanel" class="tab-pane active" id="usuarios">
+                <a class='btn btn btn-sm' class="btn btn-primary" href='\cmas\resultados\gera_xls.php?id=1'><img src='\processo\imagens\excell.png' alt='' width='25' height='25'> Gerar Planilha</a>
                     <div style="padding-top:15px;padding-left:20px;">
                         <table class="table table display table-bordered table-striped table-active tabusuarios">
                             <thead class="thead">
@@ -223,6 +224,7 @@ FROM organizacao order by nome_osc";
                 </div>
                 <!-- aba trabalhadores suas-->
                 <div role="tabpanel" class="tab-pane" id="suas">
+                <a class='btn btn btn-sm' class="btn btn-primary" href='\cmas\resultados\gera_xls.php?id=2'><img src='\processo\imagens\excell.png' alt='' width='25' height='25'> Gerar Planilha</a>
                     <div style="padding-top:15px;padding-left:20px;">
                         <table class="table table display table-bordered table-striped table-active tabsuas">
                             <thead class="thead">
@@ -260,6 +262,7 @@ FROM organizacao order by nome_osc";
                 </div>
                 <!-- aba Organização da Sociedade Civil-->
                 <div role="tabpanel" class="tab-pane" id="osc">
+                <a class='btn btn btn-sm' class="btn btn-primary" href='\cmas\resultados\gera_xls.php?id=3'><img src='\processo\imagens\excell.png' alt='' width='25' height='25'> Gerar Planilha</a>
                     <div style="padding-top:15px;padding-left:20px;">
                         <table class="table table display table-bordered table-striped table-active tabosc">
                             <thead class="thead">

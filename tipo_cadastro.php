@@ -1,6 +1,17 @@
 <?php
 session_start();
 
+date_default_timezone_set('America/Sao_Paulo');
+
+$dt_local = DateTime::createFromFormat('d-m-Y', date('d-m-Y'));
+$dt_fim = DateTime::createFromFormat('d-m-Y', '20-05-2025');
+
+
+if ($dt_local > $dt_fim) {
+    $c_prazo = 'Inscrições para o Processo encerrado!!!';
+   header('location: /cmas/prazo.php?id=' . $c_prazo);
+}
+
 // conexão dom o banco de dados
 include("conexao.php");
 include("cabecalho.php");

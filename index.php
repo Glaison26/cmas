@@ -23,6 +23,7 @@ include("cabecalho.php");
 
         <div class="container -my5" class="row col-xs-12 col-sm-12 col-md-12 col-lg-12" align="left">
             <br>
+            <!--<a id="insc" class="btn btn-primary btn-lg" href="/cmas/prazo.php"><span class="glyphicon glyphicon-edit"></span> Clique aqui para inscrição</a> -->
             <a id="insc" class="btn btn-primary btn-lg" href="/cmas/tipo_cadastro.php"><span class="glyphicon glyphicon-edit"></span> Clique aqui para inscrição</a>
             <hr>
         </div>

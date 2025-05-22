@@ -75,15 +75,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_SESSION['c_tipo'] == 'C') {
             // captura rg
             $arquivo_rg = $_FILES['arquivo_rg'];
-            move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_osa_nome . '_' . $arquivo_rg["name"]);
+            move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_cpf.'_'. $c_osa_nome . '_' . $arquivo_rg["name"]);
             $c_pasta_rg =  $dir . $c_osa_nome . '_' . $arquivo_rg["name"];
             // captura cpf
             $arquivo_cpf = $_FILES['arquivo_cpf'];
-            move_uploaded_file($arquivo_cpf["tmp_name"], "$dir/" . $c_osa_nome . '_' . $arquivo_cpf["name"]);
+            move_uploaded_file($arquivo_cpf["tmp_name"], "$dir/" . $c_cpf.'_'.$c_osa_nome . '_' . $arquivo_cpf["name"]);
             $c_pasta_cpf = $dir . $c_osa_nome . '_' . $arquivo_cpf["name"];
             // captura comprovante
             $arquivo_comprovante = $_FILES['arquivo_comprovante'];
-            move_uploaded_file($arquivo_comprovante["tmp_name"], "$dir/" . $c_osa_nome . '_' . $arquivo_comprovante["name"]);
+            move_uploaded_file($arquivo_comprovante["tmp_name"], "$dir/" .$c_cpf.'_'.$c_osa_nome . '_' . $arquivo_comprovante["name"]);
             $c_pasta_comprovante = $dir . $c_osa_nome . '_' . $arquivo_comprovante["name"];
         } else {
             // captura rg

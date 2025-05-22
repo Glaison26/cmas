@@ -58,32 +58,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_SESSION['c_tipo'] == 'C') { // somente candidato
             // captura rg
             $arquivo_rg = $_FILES['arquivo_rg'];
-            move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_rg["name"]);
+            move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" .  $c_cpf.'_'.$c_nome . '_' . $arquivo_rg["name"]);
             $c_pasta_rg =  $dir . $c_nome . '_'  . $arquivo_rg["name"];
             // captura cpf
             $arquivo_cpf = $_FILES['arquivo_cpf'];
-            move_uploaded_file($arquivo_cpf["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_cpf["name"]);
+            move_uploaded_file($arquivo_cpf["tmp_name"], "$dir/" . $c_cpf.'_'.$c_nome . '_' . $arquivo_cpf["name"]);
             $c_pasta_cpf =  $dir . $c_nome . '_'  . $arquivo_cpf["name"];
             // captura nis
             $arquivo_nis = $_FILES['arquivo_nis'];
-            move_uploaded_file($arquivo_nis["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_nis["name"]);
+            move_uploaded_file($arquivo_nis["tmp_name"], "$dir/" . $c_cpf.'_'.$c_nome . '_' . $arquivo_nis["name"]);
             $c_pasta_nis =  $dir . $c_nome . '_'  . $arquivo_nis["name"];
             // captura resumo
             $arquivo_resumo = $_FILES['arquivo_resumo'];
-            move_uploaded_file($arquivo_resumo["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_resumo["name"]);
+            move_uploaded_file($arquivo_resumo["tmp_name"], "$dir/" . $c_cpf.'_'.$c_nome . '_' . $arquivo_resumo["name"]);
             $c_pasta_resumo =  $dir . $c_nome . '_' . $arquivo_resumo["name"];
             // captura declaração
             $arquivo_declaracao = $_FILES['arquivo_declaracao'];
-            move_uploaded_file($arquivo_declaracao["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_declaracao["name"]);
+            move_uploaded_file($arquivo_declaracao["tmp_name"], "$dir/" . $c_cpf.'_'.$c_nome . '_' . $arquivo_declaracao["name"]);
             $c_pasta_declaracao =  $dir . $c_nome . '_' . $arquivo_declaracao["name"];
         } else {  // somente eleitor
             // captura rg
             $arquivo_rg = $_FILES['arquivo_rg'];
-            move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_rg["name"]);
+            move_uploaded_file($arquivo_rg["tmp_name"], "$dir/" . $c_cpf.'_'.$c_nome . '_' . $arquivo_rg["name"]);
             $c_pasta_rg =  $dir . $c_nome . '_'  . $arquivo_rg["name"];
             // captura declaração
             $arquivo_declaracao = $_FILES['arquivo_declaracao'];
-            move_uploaded_file($arquivo_declaracao["tmp_name"], "$dir/" . $c_nome . '_' . $arquivo_declaracao["name"]);
+            move_uploaded_file($arquivo_declaracao["tmp_name"], "$dir/" . $c_cpf.'_'.$c_nome . '_' . $arquivo_declaracao["name"]);
             $c_pasta_declaracao =  $dir . $c_nome . '_' . $arquivo_declaracao["name"];
         }
 
